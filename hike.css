@@ -2,19 +2,32 @@ html {
         height: 100%;
 }
 
+h2 {
+    font-family: AmericanTypewriter;
+}
+
 body {
         height: 100%;
-        margin: 0px;
+        margin: 15px;
         padding: 0px;
         background-color: green;
+        background-image: url(mountains.png);
 }
 #map_canvas {
-        height: 80%;
-        width: 100%;
+        margin: auto;
+        height: 75%;
+        width: 65%;
 
 }
 #txtBox {               /* So that all text boxes on addHike.html */
                         /*             appear aligned in a column.*/
          position: absolute;
          left: 175px;    
+}
+
+.buttons {
+    text-decoration: none;
+    position: relative;
+    top: 35px;
+    font-size: 20px;
 }
