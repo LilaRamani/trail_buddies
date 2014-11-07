@@ -19,15 +19,27 @@ body {
         width: 65%;
 
 }
-#txtBox {               /* So that all text boxes on addHike.html */
-                        /*             appear aligned in a column.*/
-         position: absolute;
-         left: 175px;    
-}
 
 .buttons {
-    text-decoration: none;
     position: relative;
     top: 35px;
     font-size: 20px;
+    color: blue;
+}
+
+#text {
+    height: 300px;
+    width: 200px;
+    font-size: 20px; 
+}
+#input_boxes {
+    height: 300px;
+    width: 200px;
+    position: relative;
+    left: 175px;
+    bottom: 299px;
+}
+
+#txtBox {
+    margin-bottom: 31px;
 }
