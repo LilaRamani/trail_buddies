@@ -13,3 +13,6 @@ Status Report #1
                 - make google maps markers for each hike in the JSON file
 
 FIN
+
+Comments by Ming
+1. " creating an XMLHttprequest" --at this point, use jQuery for XHR stuff including pulling JSON data (e.g., $.json())
