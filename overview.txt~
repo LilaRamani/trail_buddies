@@ -15,20 +15,8 @@ addHike.html:
 		- date and time
 		- estimated length
 		- hike description
-	- submit button to return to index.html
 
 hike.css:
 	- (similar to mmap's css file)
 	- map canvas
 	- align the text boxes on hike.html	
-
-
-To look into--
-   Taylor:
-	- databasing
-   Elliot:
-        - boostrap front-end framework
-   Lila:
-        - Googlemap API
-   Sam:
-        - "Restful APIs" and email notifications

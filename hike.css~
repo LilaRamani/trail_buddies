@@ -1,0 +1,5 @@
+#txtBox {		/* So that all text boxes on addHike.html */
+			/*     	       appear aligned in a column */
+	 position: absolute;
+	 left: 175px;		
+}

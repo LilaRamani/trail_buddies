@@ -1,0 +1,45 @@
+html {
+        height: 100%;
+}
+
+h2 {
+    font-family: AmericanTypewriter;
+}
+
+body {
+        height: 100%;
+        margin: 15px;
+        padding: 0px;
+        background-color: green;
+        background-image: url(mountains.png);
+}
+#map_canvas {
+        margin: auto;
+        height: 75%;
+        width: 65%;
+
+}
+
+.buttons {
+    position: relative;
+    top: 35px;
+    font-size: 20px;
+    color: blue;
+}
+
+#text {
+    height: 300px;
+    width: 200px;
+    font-size: 20px; 
+}
+#input_boxes {
+    height: 300px;
+    width: 200px;
+    position: relative;
+    left: 175px;
+    bottom: 299px;
+}
+
+#txtBox {
+    margin-bottom: 31px;
+}
