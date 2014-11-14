@@ -4,6 +4,7 @@ html {
 
 h2 {
     font-family: AmericanTypewriter;
+    font-size: 30px;
 }
 
 body {
@@ -23,8 +24,14 @@ body {
 .buttons {
     position: relative;
     top: 35px;
-    font-size: 20px;
+    font-size: 25px;
+    font-style: Courier-bold;
     color: blue;
+    cursor: pointer;
+}
+#submit {
+    left: 126px;
+
 }
 
 #text {
@@ -40,6 +47,17 @@ body {
     bottom: 299px;
 }
 
-#txtBox {
+.txtBox {
     margin-bottom: 31px;
+}
+
+#popup_message {
+    font-size: 40px;
+    color: purple;
+    font-style: Arial;
+}
+
+.highlight
+{
+    border: 1px solid red !important;
 }
