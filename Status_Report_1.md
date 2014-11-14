@@ -12,6 +12,7 @@ Status Report #1
                 - parsing the JSON
                 - make google maps markers for each hike in the JSON file
 
+
 FIN
 
 Comments by Ming
