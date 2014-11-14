@@ -1,11 +1,12 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html>
-<!-- Note: We may change this file  into a javascript
+<!-- Note: We may change this file  into a javascript                           
      functionality within index.html in the future -->
 <head>
   <title>Add a Hike!</title>
-	<link rel="stylesheet" href="joinHike.css" />  
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="hike.css" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"\
+></script>
   <script type="text/javascript" src="main.js"></script>
 </head>
 
@@ -35,4 +36,5 @@
 
 
 </html>
+
 
