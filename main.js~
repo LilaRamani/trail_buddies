@@ -16,7 +16,7 @@ function submit_click() {
 	});
 	if (isFormValid == true) {
 		$("#popup_message").css("color", "purple");
-		$("#popup_message").text("You Have Succesfully Added 1 Hike!");//This needs to say "... Joined 1 Hike!" instead for the joinHike
+		$("#popup_message").text("You Have Succesfully Added 1 Hike!");
 		setTimeout( "window.location.assign('index.html');",2000 );
 	} else {
 		$("#popup_message").css("color", "red");
