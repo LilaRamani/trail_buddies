@@ -12,6 +12,7 @@
 
 
 <body>
+    <div id="popup_message"></div>
     <div id="text">
       <h4>Name:</h4>
       <h4>Email:</h4>
@@ -19,15 +20,15 @@
       <h4>Date and Time:</h4>
       <h4>Estimated Length:</h4>
       <h4>Hike Description:</h4>
-      <p><a id="submit" class= "buttons" href="index.html">submit</a></p>
+      <p id="submit" class= "buttons" onclick="submit_click()">submit</p>
     </div>
     <div id="input_boxes">
-      <input type="text" id="txtBox" name="nameBox" size="30" />
-      <input type="text" id="txtBox" name="emailBox" size="30" />
-      <input type="text" id="txtBox" name="hikeAddressBox" size="30" />
-      <input type="text" id="txtBox" name="dateTimeBox" size="30" />
-      <input type="text" id="txtBox" name="hikeLengthBox" size="30"/>
-      <input type="text" id="txtBox" name="hikeDescBox" size="30"/>
+      <input type="text" class="txtBox" name="nameBox" size="30" />
+      <input type="text" class="txtBox" name="emailBox" size="30" />
+      <input type="text" class="txtBox" name="hikeAddressBox" size="30" />
+      <input type="text" class="txtBox" name="dateTimeBox" size="30" />
+      <input type="text" class="txtBox" name="hikeLengthBox" size="30"/>
+      <input type="text" class="txtBox" name="hikeDescBox" size="30"/>
     </div>
 </body>
 
