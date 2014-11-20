@@ -1,6 +1,6 @@
 $( document ).ready(function() {
 	console.log("ready!");
-});
+    });
 
 function submit_click() {
     var isFormValid = true;
