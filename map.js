@@ -47,7 +47,7 @@ function renderMap()
                 infowindow.open(map, marker);
         });
 
-        request.open("GET", "http://OURHEROKU.herokuapp.com/locations.json", true);
+        request.open("GET", "http://ancient-lake-4187.herokuapp.com/locations.json", true);
 
         request.onreadystatechange = callback;
 
@@ -77,7 +77,7 @@ function createHikeMark(hike)
                 title: hike.date_time
         });
 
-        var content = marker.title + "</br>" + "With: " + hike.nm + "</br>" +
+        var content = marker.title + "</br>" + "With: " + hike.login + "</br>" +
                               hike.descript;
 
         google.maps.event.addListener(marker, 'click', function() {
