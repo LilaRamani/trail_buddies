@@ -2,9 +2,7 @@ $( document ).ready(function() {
     console.log("ready!");
 });
 
-var request = new XMLHttpRequest();
 function submit_click() {
-
 	var isFormValid = true;
 	var errorMessageEmpty = "One or more fields are empty";
 	var errorMessageDate = "Please specify a date in the following format: DD/MM/YYYY";
@@ -39,7 +37,13 @@ function submit_click() {
 		console.log("incorrect date format" );
 	    }
         } else {
-	    $(this).removeClass("highlight");
+	    if (errorMessage1 == errorMessageDate) {
+		console.log("its error message date" );
+var nline = "\n";
+		var errorMessagenew = errorMessage1.concat(nline);
+		errorMessage1 = errorMessage1.concat(errorMessagenew);
+	    }
+        $(this).removeClass("highlight");
 	}
     }
 	    });

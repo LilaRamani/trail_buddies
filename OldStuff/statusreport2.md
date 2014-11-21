@@ -29,16 +29,3 @@ Sam:
 	
 	Next week, we should have a database up and running, and I think a lot of my 
 	javascript code can get written.
-
-
-Taylor:
-     I created a joinHike.css file which has the new formatting that was created by Lila in the addHike file.
-     This file is linked to by the index.html page.
-     I combined all of the files (the changes that Elliot made within his bootstrap folder and the changes
-     that lila made within the main directory) so that all of the changes are together with a mix of both.
-     So now that Elliot's changes have been copied from the bootstrap folder into the default directory,
-     the newest version can be seen by just looking at the default index.html file.
-
-     Next Week:Plan to modify the js	file for joining a hike	so that	the proper messages are	displayed
-               rather than just	 the ones that are displayed for   adding a hike. Start doing the database material
-	       so that we can actually store and access data!!

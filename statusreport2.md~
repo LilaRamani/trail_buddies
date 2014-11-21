@@ -39,6 +39,6 @@ Taylor:
      So now that Elliot's changes have been copied from the bootstrap folder into the default directory,
      the newest version can be seen by just looking at the default index.html file.
 
-     Next Week:Plan to modify the js	file for joining a hike	so that	the proper messages are	displayed
-               rather than just	 the ones that are displayed for   adding a hike. Start doing the database material
-	       so that we can actually store and access data!!
+     Next Week:
+             - We plan to modify the js	file for joining a hike	so that	the proper messages are	displayed
+               rather than just	 the ones that are displayed for   adding a hike.

@@ -37,16 +37,9 @@ body {
 #text {
     height: 300px;
     width: 200px;
-    font-size: 20px; 
+    font-size: 20px;
 }
 #input_boxes {
-    height: 300px;
-    width: 200px;
-    position: relative;
-    left: 175px;
-    bottom: 299px;
-}
-#date_input_box {
     height: 300px;
     width: 200px;
     position: relative;
@@ -58,16 +51,12 @@ body {
     margin-bottom: 31px;
 }
 
-#popup_message {	//for addHike
+#popup_message {
     font-size: 40px;
     color: purple;
     font-style: Arial;
 }
-#popup_message2 {	//For joining a hike
-    font-size: 40px;
-    color: purple;
-    font-style: Arial;
-}
+
 .highlight
 {
     border: 1px solid red !important;
