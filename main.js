@@ -47,9 +47,9 @@ function submit_click() {
         });
 	                                                                                                                     
         if (isFormValid == true) {
-                request.open("POST", "http://OURHEROKU.herokuapp.com/sendLocation", true);
+                request.open("POST", "http://ancient-lake-4187.herokuapp.com/sendLocation", true);
                 // HOW DO WE GET LAT AND LNG FROM HERE, JUST BASED ON THE ADDRESS?????
-                parameters = "nm=" + $("#name").val() + "&email=" $("#email").val() + "&address=" +
+                parameters = "login=" + $("#login").val() + "&email=" $("#email").val() + "&address=" +
                         $("#address").val() + "&date_time=" + $("#date_time").val() + "&hike_length=" +
                         $("#hike_length").val() + "&descript=" + $("#description").val();
                 request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
