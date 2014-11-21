@@ -1,6 +1,7 @@
 var map;
 var myLat = 0;
 var myLng = 0;
+var request = new XMLHttpRequest();
 var me = new google.maps.LatLng(myLat, myLng);
 var marker;
 var mapOptions = {
@@ -38,7 +39,7 @@ function renderMap()
         //CREATE MARKER
         marker = new google.maps.Marker({
                 position: me,
-                title: "I am here",
+                title: "You Are Here",
         });
         marker.setMap(map);
 
@@ -46,5 +47,22 @@ function renderMap()
                 infowindow.setContent(marker.title);
                 infowindow.open(map, marker);
         });
+
+        request.open("GET", "http://OURHEROKU.herokuapp.com/locations.json", true);
+
+//        request.onreadystatechange = callback;
+
+        //request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        //request.send(parameters);
+
 }
+
+/*
+function callback()
+{
+        if (request.readyState == 4 && request.status == 200) {
+                var data = JSON.parse(request.responseText);
+        }
+}
+*/
 google.maps.event.addDomListener(window, 'load', initialize);
