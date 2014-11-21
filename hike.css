@@ -47,16 +47,21 @@ body {
     bottom: 299px;
 }
 
+
 .txtBox {
     margin-bottom: 31px;
 }
 
-#popup_message {
+#popup_message {	//for addHike
     font-size: 40px;
     color: purple;
     font-style: Arial;
 }
-
+#popup_message2 {	//For joining a hike
+    font-size: 40px;
+    color: purple;
+    font-style: Arial;
+}
 .highlight
 {
     border: 1px solid red !important;
