@@ -9,3 +9,20 @@ Taylor:
   of showing a ten-day forecase. So, Using this date format, we can check if the date is within 10 days from now,
   and in the case that it is, we can automatically use website scraping to find and store the weather data for that 
   hike.
+
+
+Sam + Lila:
+
+Set up the POST and GET request in map.js and main.js so that it gets the data from a server 
+when the map loads, And POSTs data to the server when a user adds a hike.
+
+Created a temporary server and pushed it to heroku. 
+
+Created a gitignore file and got rid of all the stupid files that we don't need.
+
+
+Elliot:
+
+Worked more on integrating the bootstrap framework into our codebase.
+
+
