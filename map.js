@@ -49,19 +49,41 @@ function renderMap()
 
         request.open("GET", "http://OURHEROKU.herokuapp.com/locations.json", true);
 
-//        request.onreadystatechange = callback;
+        request.onreadystatechange = callback;
 
         //request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         //request.send(parameters);
 
 }
 
-/*
+
 function callback()
 {
         if (request.readyState == 4 && request.status == 200) {
                 var data = JSON.parse(request.responseText);
+
+                for(var j = 0; j < data.hikes.length; j++) {
+                        createHikeMark(data.hikes[j]);
+                }
         }
 }
-*/
+
+function createHikeMark(hike)
+{
+        var loc = new google.maps.LatLng(hike.lat, hike.lng);
+        var marker = new google.maps.Marker({
+                map: map,
+                position: loc,
+                title: hike.date_time
+        });
+
+        var content = marker.title + "</br>" + "With: " + hike.nm + "</br>" +
+                              hike.descript;
+
+        google.maps.event.addListener(marker, 'click', function() {
+                infowindow.close();
+                infowindow.setContent(content);
+                infowindow.open(map, this);
+        });
+}
 google.maps.event.addDomListener(window, 'load', initialize);

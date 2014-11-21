@@ -32,13 +32,15 @@ function submit_click() {
                                         console.log("date format is correct, as: DD/MM/YYYY");
                                         $(this).removeClass("highlight");
                                         errorMessage1 = errorMessageEmpty;
-                                } else {
+                                } 
+                                else {
                                         errorMessage1 = errorMessageDate;
                                         isFormValid = false;
                                         $(this).addClass("highlight");
                                         console.log("incorrect date format" );
                                 }
-                        } else {
+                        } 
+                        else {
                                 $(this).removeClass("highlight");
 	}
                 }
@@ -46,9 +48,10 @@ function submit_click() {
 	                                                                                                                     
         if (isFormValid == true) {
                 request.open("POST", "http://OURHEROKU.herokuapp.com/sendLocation", true);
-                parameters = "name=" + $("#name").val() + "&email=" $("#email").val() + "&address=" +
+                // HOW DO WE GET LAT AND LNG FROM HERE, JUST BASED ON THE ADDRESS?????
+                parameters = "nm=" + $("#name").val() + "&email=" $("#email").val() + "&address=" +
                         $("#address").val() + "&date_time=" + $("#date_time").val() + "&hike_length=" +
-                        $("#hike_length").val() + "&description=" + $("#description").val();
+                        $("#hike_length").val() + "&descript=" + $("#description").val();
                 request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                 request.send(parameters);
 
