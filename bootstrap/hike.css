@@ -11,10 +11,31 @@ body {
         height: 100%;
         margin: 15px;
         padding: 0px;
+<<<<<<< HEAD
+=======
         background-color: green;
         background-image: url(mountains.png);
+>>>>>>> 3f995e6bd1c4a0ee97a443fb0e2b026ad63d8376
 }
+
+
 #map_canvas {
+<<<<<<< HEAD
+        height: 100%;
+        width: 100%;
+        float: left;
+        z-index: -1;
+}
+
+.navbar {
+    margin-bottom: 0px;
+}
+
+#txtBox {               /* So that all text boxes on addHike.html */
+                        /*             appear aligned in a column.*/
+         position: absolute;
+         left: 175px;    
+=======
         margin: auto;
         height: 75%;
         width: 65%;
@@ -64,4 +85,5 @@ body {
 .highlight
 {
     border: 1px solid red !important;
+>>>>>>> 3f995e6bd1c4a0ee97a443fb0e2b026ad63d8376
 }
