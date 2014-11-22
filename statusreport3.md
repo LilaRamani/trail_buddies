@@ -23,6 +23,6 @@ Created a gitignore file and got rid of all the stupid files that we don't need.
 
 Elliot:
 
-Worked more on integrating the bootstrap framework into our codebase.
+Worked more on integrating the bootstrap framework into our codebase. Added an in-page add a hike form. and streamlined the nav bar
 
 
