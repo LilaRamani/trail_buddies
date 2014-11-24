@@ -25,4 +25,6 @@ Elliot:
 
 Worked more on integrating the bootstrap framework into our codebase. Added an in-page add a hike form. and streamlined the nav bar
 
+Comments by Ming
+1. How is the server side stuff coming along?  That's going to be the critical piece.  What's the Heroku URL?
 
