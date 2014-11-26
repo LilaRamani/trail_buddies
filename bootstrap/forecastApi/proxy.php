@@ -10,4 +10,6 @@ if(!isset($_GET['url'])) die();
 $url = $url . urldecode($_GET['url']);
 $url = file_get_contents($url);
 
-print_r($url);
+//print_r($url);
+
+echo $url;
