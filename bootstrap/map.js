@@ -47,3 +47,21 @@ function renderMap()
         });
 }
 google.maps.event.addDomListener(window, 'load', initialize);
+
+
+$(document).ready(function() {
+
+        $.ajax({
+                dataType: 'json',
+                url: "https://api.forecast.io/forecast/200e4b0adde1dcf733e2eca4b88066ab/37.8267,-122.423",
+                success: function($weatherData) {
+                       console.log($weatherData);
+                }
+        });
+});
+
+
+
+
+
+
