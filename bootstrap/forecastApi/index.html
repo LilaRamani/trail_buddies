@@ -41,7 +41,7 @@
 	/*
 	 * GET HOURLY CONDITIONS FOR TODAY
 	 */
-	var conditions_today = forecast.getForecastToday(latitude, longitude);
+	/*var conditions_today = forecast.getForecastToday(latitude, longitude);
 	var items = '';
 
 	for(i=0; i<conditions_today.length; i++) {
@@ -50,9 +50,9 @@
 
 	document.getElementById("itemList").innerHTML = items;
 
-	/*
-	 * GET DAILY CONDITIONS FOR NEXT 7 DAYS
-	 */
+
+	 // GET DAILY CONDITIONS FOR NEXT 7 DAYS
+
 
 	var conditions_week = forecast.getForecastWeek(latitude, longitude);
 	var items2 = '';
@@ -61,7 +61,7 @@
 		items2 += "<li>"  + conditions_week[i].getTime('YYYY-MM-DD') + ': ' + conditions_week[i].getMaxTemperature() + "</li>";
 	}
 
-	document.getElementById("itemList2").innerHTML = items2;
+	document.getElementById("itemList2").innerHTML = items2;*/
 
 	</script>
 </body>
