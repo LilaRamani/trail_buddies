@@ -12,7 +12,35 @@ function initialize() {
         map = new google.maps.Map(document.getElementById('map_canvas'),
         mapOptions);
         MyLocation();
+
+        google.maps.event.addListener(map, 'rightclick', function(e) {
+                placeMarker(e.latLng, map);
+        });
 }
+
+function placeMarker(position, map) {
+        var marker = new google.maps.Marker({
+                position: position,
+                map: map
+        });
+
+        addInfoWindow(marker);
+
+        map.panTo(position);
+}
+
+function addInfoWindow(marker) {
+        var infowindow = new google.maps.InfoWindow({
+                content: "<a href=\"#\" class=\"addHikeLink\" data-toggle=\"modal\" data-target=\"#myModal\">Add this hike</a>"
+        });
+
+        infowindow.open(map,marker);
+
+        google.maps.event.addListener(marker, 'click', function() {
+                infowindow.open(map,marker);
+        });
+}
+
 function MyLocation()
 {
         if (navigator.geolocation) {
