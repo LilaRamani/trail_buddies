@@ -25,3 +25,7 @@ body {
 #hikeinfo, #personalinfo {
         margin-bottom: 30px; 
 }
+
+.cancel {
+        margin-left: 5px;
+}
