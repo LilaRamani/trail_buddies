@@ -13,7 +13,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="index.css" />
-
+    <script type="text/javascript" src="index.js"></script>
 
     <title>Trail Buddies Template</title>
 
@@ -88,9 +88,9 @@
                     <input type="text" class="form-control" placeholder="Start date/time add datepicker">
                     <input type="text" class="form-control" placeholder="End date/time   add datepicker">
                     Selected Latitude
-                    <input type="text" class="form-control"  value="20">
+                    <input type="text" id="hikeLat" class="form-control"  value="20">
                     Selected Longitude
-                    <input type="text" class="form-control"  value="-44">
+                    <input type="text" id="hikeLng" class="form-control"  value="-44">
                     <textarea rows=7 type="text" class="form-control" placeholder="Description"></textarea>
             </div>
         </div>
@@ -102,6 +102,6 @@
 </div>
 </div>
     <div id="map_canvas"></div>
-    <script type="text/javascript" src="index.js"></script>
+
 </body>
 </html>

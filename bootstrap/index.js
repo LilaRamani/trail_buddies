@@ -1,8 +1,9 @@
 var map;
-var myLat = 0;
-var myLng = 0;
+var myLat = 41;
+var myLng = -120;
 var me = new google.maps.LatLng(myLat, myLng);
-var marker;
+var GLOBALmarker;
+var GLOBALinfowindow;
 var mapOptions = {
         center: me,
         zoom: 8
@@ -19,27 +20,68 @@ function initialize() {
 }
 
 function placeMarker(position, map) {
-        var marker = new google.maps.Marker({
+
+        clearUserMarker();
+
+        GLOBALmarker = new google.maps.Marker({
                 position: position,
                 map: map
         });
 
-        addInfoWindow(marker);
+        // set lat and lng values in add hike input field
+        $('#hikeLat').val(GLOBALmarker.getPosition().lat());
+        $('#hikeLng').val(GLOBALmarker.getPosition().lng());
+
+        addInfoWindow(GLOBALmarker);
 
         map.panTo(position);
+
+}
+
+function clearUserMarker () {
+
+        if (GLOBALmarker != undefined) {
+
+                // delete all other markers added in this session
+                GLOBALmarker.setMap(null);
+                GLOBALmarker = null;
+        }
 }
 
 function addInfoWindow(marker) {
-        var infowindow = new google.maps.InfoWindow({
-                content: "<a href=\"#\" class=\"addHikeLink\" data-toggle=\"modal\" data-target=\"#myModal\">Add this hike</a>"
+
+        GLOBALinfowindow = new google.maps.InfoWindow({
+                content: "<button data-toggle=\"modal\" data-target=\"#myModal\">Add this hike</button>",
         });
 
-        infowindow.open(map,marker);
+        console.log(marker.getPosition().lat());
+
+        GLOBALinfowindow.open(map,marker);
 
         google.maps.event.addListener(marker, 'click', function() {
-                infowindow.open(map,marker);
+                GLOBALinfowindow.open(map,marker);
+        });
+
+        google.maps.event.addListener(GLOBALinfowindow, 'closeclick', function() {
+                GLOBALinfowindow.close();
+                clearUserMarker();
         });
 }
+
+$('.cancel').click( function(e) {
+        console.log(this);
+        console.log(e);
+});
+
+$('#foxtrot').click( function(e) {
+        console.log(this);
+        console.log(e);
+});  
+
+$('button').click( function(e) {
+        console.log(this);
+        console.log(e);
+}); 
 
 function MyLocation()
 {
@@ -63,21 +105,21 @@ function renderMap()
         map.panTo(me);
   
         //CREATE MARKER
-        marker = new google.maps.Marker({
+        myMarker = new google.maps.Marker({
                 position: me,
                 title: "I am here",
         });
-        marker.setMap(map);
+        myMarker.setMap(map);
 
-        google.maps.event.addListener(marker, 'click', function() {
-                infowindow.setContent(marker.title);
-                infowindow.open(map, marker);
+        google.maps.event.addListener(myMarker, 'click', function() {
+                GLOBALinfowindow.setContent(myMarker.title);
+                GLOBALinfowindow.open(map, myMarker);
         });
 }
 google.maps.event.addDomListener(window, 'load', initialize);
 
 
-$(document).ready(function() {
+/*$(document).ready(function() {
 
         $.ajax({
                 dataType: 'json',
@@ -86,7 +128,7 @@ $(document).ready(function() {
                        console.log($weatherData);
                 }
         });
-});
+});*/
 
 
 
