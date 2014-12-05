@@ -51,7 +51,7 @@ function clearUserMarker () {
 function addInfoWindow(marker) {
 
         GLOBALinfowindow = new google.maps.InfoWindow({
-                content: "<button data-toggle=\"modal\" data-target=\"#myModal\">Add this hike</button>",
+                content: "<button data-toggle=\"modal\" data-target=\"#myModal\">Add hike</button>",
         });
 
         console.log(marker.getPosition().lat());
@@ -67,21 +67,6 @@ function addInfoWindow(marker) {
                 clearUserMarker();
         });
 }
-
-$('.cancel').click( function(e) {
-        console.log(this);
-        console.log(e);
-});
-
-$('#foxtrot').click( function(e) {
-        console.log(this);
-        console.log(e);
-});  
-
-$('button').click( function(e) {
-        console.log(this);
-        console.log(e);
-}); 
 
 function MyLocation()
 {
@@ -129,6 +114,10 @@ google.maps.event.addDomListener(window, 'load', initialize);
                 }
         });
 });*/
+
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})
 
 
 
