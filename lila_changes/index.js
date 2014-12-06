@@ -51,10 +51,8 @@ function clearUserMarker () {
 function addInfoWindow(marker) {
 
         GLOBALinfowindow = new google.maps.InfoWindow({
-                content: "<button data-toggle=\"modal\" data-target=\"#myModal\">Add this hike</button>",
+                content: "<button data-toggle=\"modal\" data-target=\"#myModal\">Add hike</button>",
         });
-
-        console.log(marker.getPosition().lat());
 
         GLOBALinfowindow.open(map,marker);
 
@@ -67,21 +65,6 @@ function addInfoWindow(marker) {
                 clearUserMarker();
         });
 }
-
-$('.cancel').click( function(e) {
-        console.log(this);
-        console.log(e);
-});
-
-$('#foxtrot').click( function(e) {
-        console.log(this);
-        console.log(e);
-});  
-
-$('button').click( function(e) {
-        console.log(this);
-        console.log(e);
-}); 
 
 function MyLocation()
 {
@@ -130,8 +113,21 @@ google.maps.event.addDomListener(window, 'load', initialize);
         });
 });*/
 
+$(function () {
+        $('[data-toggle="popover"]').popover()
+})
 
 
+// called when add hike "save changes" button is clicked
+function submit_addhike() {
+        //need to change some of the variable names so that the post request will work
+        var formData = $('#addhikeform').serialize();
+        console.log(formData);
+        $.post( "http://ancient-lake-4187.herokuapp.com/sendLocation", formData, function( data ) {
+                console.log( "data is back!");
+                console.log( data );
+        }, "json");
+}
 
 
 

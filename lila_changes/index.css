@@ -26,6 +26,6 @@ body {
         margin-bottom: 30px; 
 }
 
-.cancel {
-        margin-left: 5px;
+.popover {
+        width: 160px;
 }
