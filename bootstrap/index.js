@@ -54,8 +54,6 @@ function addInfoWindow(marker) {
                 content: "<button data-toggle=\"modal\" data-target=\"#myModal\">Add hike</button>",
         });
 
-        console.log(marker.getPosition().lat());
-
         GLOBALinfowindow.open(map,marker);
 
         google.maps.event.addListener(marker, 'click', function() {
@@ -116,11 +114,18 @@ google.maps.event.addDomListener(window, 'load', initialize);
 });*/
 
 $(function () {
-  $('[data-toggle="popover"]').popover()
+        $('[data-toggle="popover"]').popover()
 })
 
 
+// called when add hike "save changes" button is clicked
+function submit_addhike() {
+        var formData = $('#addhikeform').serialize();
 
+        /*$.post( "OUR SERVER URL", formData, function( data ) {
+                  console.log( data );
+        }, "json");*/
+}
 
 
 
