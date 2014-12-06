@@ -13,9 +13,38 @@ function initialize() {
         map = new google.maps.Map(document.getElementById('map_canvas'),
         mapOptions);
         MyLocation();
-
+        $.get("http://ancient-lake-4187.herokuapp.com/", function(data) {
+                for(var j = 0; j < data.length; j++) {
+                        createHikeMark(data[j]);
+                }
+        }, "json");
         google.maps.event.addListener(map, 'rightclick', function(e) {
                 placeMarker(e.latLng, map);
+        });
+}
+
+function createHikeMark(hike)
+{
+        var loc = new google.maps.LatLng(hike.lat, hike.lng);
+        var marker = new google.maps.Marker({
+                map: map,
+                position: loc,
+                title: hike.hike_name
+        });
+        var participants = "";
+
+        for (var i = 0; i < hike.participants.length; i++) {
+            participants += hike.participants[i] + ", ";
+        }
+
+        var content = marker.title + "</br>" + "With: " + participants + "</br>" +
+                              hike.descript;
+
+        var infowindow = new google.maps.InfoWindow();
+        google.maps.event.addListener(marker, 'click', function() {
+                infowindow.close();
+                infowindow.setContent(content);
+                infowindow.open(map, this);
         });
 }
 
@@ -127,6 +156,7 @@ function submit_addhike() {
                 console.log( "data is back!");
                 console.log( data );
         }, "json");
+        clearUserMarker();
 }
 
 
