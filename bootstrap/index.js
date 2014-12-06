@@ -121,7 +121,7 @@ $(function () {
 // called when add hike "save changes" button is clicked
 function submit_addhike() {
         var formData = $('#addhikeform').serialize();
-
+        console.log(formData);
         $.post( "http://ancient-lake-4187.herokuapp.com/sendLocation", formData, function( data ) {
                 console.log( "data is back!");
                 console.log( data );
