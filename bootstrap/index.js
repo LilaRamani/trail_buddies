@@ -122,9 +122,10 @@ $(function () {
 function submit_addhike() {
         var formData = $('#addhikeform').serialize();
 
-        /*$.post( "OUR SERVER URL", formData, function( data ) {
-                  console.log( data );
-        }, "json");*/
+        $.post( "http://ancient-lake-4187.herokuapp.com/sendLocation", formData, function( data ) {
+                console.log( "data is back!");
+                console.log( data );
+        }, "json");
 }
 
 
