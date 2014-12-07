@@ -1,26 +1,81 @@
+
+/****************************************************************  
+ *                                                              *
+ *                                                              *
+ *                   Google Maps functions                      *
+ *                                                              *
+ *                                                              *
+ ****************************************************************/
+
 var map;
-var myLat = 41;
-var myLng = -120;
+var myLat = 0;
+var myLng = -100;
 var me = new google.maps.LatLng(myLat, myLng);
 var GLOBALmarker;
 var GLOBALinfowindow;
 var mapOptions = {
         center: me,
-        zoom: 8
+        zoom: 2
 };
 
 function initialize() {
-        map = new google.maps.Map(document.getElementById('map_canvas'),
-        mapOptions);
+        map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+
         MyLocation();
+
+        getHikes();
+
+        google.maps.event.addListener(map, 'rightclick', function(e) {
+                placeMarker(e.latLng, map);
+        });
+}
+
+function MyLocation()
+{
+        if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                        myLat = position.coords.latitude;
+                        myLng = position.coords.longitude;
+                        renderMap();
+                });
+        }
+        else {
+                alert("Your Browser doesn't support geolocation");
+        }
+}
+
+//set up map
+function renderMap()
+{
+        me = new google.maps.LatLng(myLat, myLng);
+        
+        map.panTo(me);
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+
+
+
+
+/****************************************************************  
+ *                                                              *
+ *                                                              *
+ *                   Trail Buddies functions                    *
+ *                                                              *
+ *                                                              *
+ ****************************************************************/
+
+
+
+
+function getHikes() {
+
         $.get("http://ancient-lake-4187.herokuapp.com/", function(data) {
                 for(var j = 0; j < data.length; j++) {
                         createHikeMark(data[j]);
                 }
         }, "json");
-        google.maps.event.addListener(map, 'rightclick', function(e) {
-                placeMarker(e.latLng, map);
-        });
 }
 
 function createHikeMark(hike)
@@ -95,52 +150,6 @@ function addInfoWindow(marker) {
         });
 }
 
-function MyLocation()
-{
-        if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                        myLat = position.coords.latitude;
-                        myLng = position.coords.longitude;
-                        renderMap();
-                });
-        }
-        else {
-                alert("Your Browser doesn't support geolocation");
-        }
-}
-
-//set up map
-function renderMap()
-{
-        me = new google.maps.LatLng(myLat, myLng);
-        
-        map.panTo(me);
-  
-        //CREATE MARKER
-        myMarker = new google.maps.Marker({
-                position: me,
-                title: "I am here",
-        });
-        myMarker.setMap(map);
-
-        google.maps.event.addListener(myMarker, 'click', function() {
-                GLOBALinfowindow.setContent(myMarker.title);
-                GLOBALinfowindow.open(map, myMarker);
-        });
-}
-google.maps.event.addDomListener(window, 'load', initialize);
-
-
-/*$(document).ready(function() {
-
-        $.ajax({
-                dataType: 'json',
-                url: "https://api.forecast.io/forecast/200e4b0adde1dcf733e2eca4b88066ab/37.8267,-122.423",
-                success: function($weatherData) {
-                       console.log($weatherData);
-                }
-        });
-});*/
 
 $(function () {
         $('[data-toggle="popover"]').popover()
