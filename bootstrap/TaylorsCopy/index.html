@@ -101,15 +101,16 @@
                         <option>15</option>
                         <option>20</option>
                     </select>
-                    <input type="text" name="start_date" class="form-control" placeholder="Start date/time add datepicker" readonly>
-                    <input type="text" name="end_date" class="form-control" placeholder="End date/time   add datepicker" readonly>
+                    <input type="text" name="start_date" class="form-control" id="startDateJoin" placeholder="Start date/time add datepicker" readonly>
+                    <input type="text" name="end_date" class="form-control" id="endDateJoin" placeholder="End date/time   add datepicker" readonly>
+		    <!-- Added id fields to both of the date input boxes -->
 
                     Selected Latitude
                     <input type="text" name="lat" id="latOfHike" class="form-control"  value="20" readonly><!-- Changed hikeLat to latOfHike -->
                     Selected Longitude
                     <input type="text" name="lng" id="lngOfHike" class="form-control"  value="-44" readonly><!-- changed to lngOfHike -->
-                    <textarea readonly rows=7  name="description" type="text" class="form-control" placeholder="Description"></textarea>
-                </div>
+                    <textarea readonly rows=7  name="description"  id="descriptionJoin" type="text" class="form-control" placeholder="Description"></textarea>
+                </div><!--Added an id field and gave it "descriptJoin" -->
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

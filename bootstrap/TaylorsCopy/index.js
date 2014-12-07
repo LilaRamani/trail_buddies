@@ -65,9 +65,6 @@ function createHikeMark(hike)
 	participants += hike.participants[i] + ", ";
     }
 
-    //$('#latOfHike').val(marker.getPosition().lat());
-    //$('#lngOfHike').val(marker.getPosition().lng());
-
     //Includes the new button now:
     var theContent = marker.title + "</br>" + "With: " + participants + "</br>" +
 	hike.descript + "</br>"+
@@ -79,26 +76,29 @@ function createHikeMark(hike)
 	content: theContent,
     });
 
-    //$.get("http://ancient-lake-4187.herokuapp.com/", function(data) {
-    //for(var j = 0; j < data.length; j++) {
-    //createHikeMark(data[j]);
-    //}
-    //}, "json");
-
     google.maps.event.addListener(marker, 'click', function(){
-	    JOINinfowindow.close();/*
-      	    $.get("http://ancient-lake-4187.herokuapp.com/", function(data) {
+	    JOINinfowindow.close();
+       	    $.get("http://ancient-lake-4187.herokuapp.com/", function(data) {
 		   for(var j = 0; j < data.length; j++) {
-		       createHikeMark(data[j]);
+		       setJoinHikeFormData(data[j]);
 		   }
-		   }, "json");*/
+		   }, "json");
       	    JOINinfowindow.setContent(theContent);//Set content with button each time
 	    JOINinfowindow.open(map,this);
 	});
    
   
 }
-
+//Helper function for the 'click' event in createHikeMark function. 
+//(For when someone clicks the "Join hike" button)
+//Will set the values of the fields that appear on the form that pops up on the screen
+//so that they are already populated with the information. 
+function setJoinHikeFormData(hike) {
+    console.log("Hike lat getting: " + hike.lat);
+    $('#latOfHike').val(hike.lat);  
+    $('#lngOfHike').val(hike.lng);
+  
+}
 
 function placeMarker(position, map) {
 
@@ -219,7 +219,7 @@ function submit_joinhike() {
     //need to change some of the variable names so that the post request will work                                                                                           
     var formData = $('#joinhikeform').serialize();
     console.log(formData);
-    $.post( "http://ancient-lake-4187.herokuapp.com/joinHike", formData, function( data ) {
+    $.post( "http://ancient-lake-4187.herokuapp.com/joinHikeTaylor", formData, function( data ) {
 	    console.log( "data is back here now");
 	    console.log( data );
         }, "json");
