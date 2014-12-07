@@ -49,8 +49,8 @@ function createHikeMark(hike)
         });
 }
 */
-//TAylors version
 
+//This is the new version of this function, which now it includes the button:
 function createHikeMark(hike)
 {
     var loc = new google.maps.LatLng(hike.lat, hike.lng);
@@ -64,29 +64,25 @@ function createHikeMark(hike)
     for (var i = 0; i < hike.participants.length; i++) {
 	participants += hike.participants[i] + ", ";
     }
-    var theContent = participants + "<button data-toggle=\"modal\" data-target=\"#myModal\">Add hike</button>";
+
+    //Includes the new button now:
+    var theContent = marker.title + "</br>" + "With: " + participants + "</br>" +
+	hike.descript + "</br>"+
+	"<button data-toggle=\"modal\" data-target=\"#myModal2\">Join hike</button>";
 
 
-    //TAYLOR:                                                                                                               
-        JOINinfowindow = new google.maps.InfoWindow({
-		    	    content: participants + "<button data-toggle=\"modal\" data-target=\"#myModal\">Add hike</button>",
-		//		content: theContent,
-    	});
+    //Set initial content to include button 
+    JOINinfowindow = new google.maps.InfoWindow({
+	content: theContent,
+    });
 
 
-	JOINinfowindow.open(map,marker);
     google.maps.event.addListener(marker, 'click', function(){
 	    JOINinfowindow.close();
-	    //  JOINinfowindow.setContent(participants);
-	    	    JOINinfowindow.setContent(theContent);
+      	    JOINinfowindow.setContent(theContent);//Set content with button each time
 	    JOINinfowindow.open(map,this);
 	});
-    //    google.maps.event.addListener(JOINinfowindow, 'closeclick', function(){
-    //	    JOINinfowindow.close();
-    //	});
-
-
-    //ENDTAYLOR^                                                                                                            
+   
   
 }
 
@@ -124,7 +120,7 @@ function addInfoWindow(marker) {
 
         GLOBALinfowindow = new google.maps.InfoWindow({
 		//                content: "<button data-toggle=\"modal\" data-target=\"#myModal\">Add hike</button>",
-                content: "<button data-toggle=\"modal\" data-target=\"#myModal\">Add hike</button>" + "Yes",          
+                content: "<button data-toggle=\"modal\" data-target=\"#myModal\">Add hike</button>",          
 
         });
 
@@ -202,6 +198,19 @@ function submit_addhike() {
                 console.log( data );
         }, "json");
         clearUserMarker();
+}
+
+
+//called when "add hike" button is clicked from Join Hike
+function submit_joinhike() {
+    //need to change some of the variable names so that the post request will work                                                                                           
+    var formData = $('#joinhikeform').serialize();
+    console.log(formData);
+    $.post( "http://ancient-lake-4187.herokuapp.com/joinHike", formData, function( data ) {
+	    console.log( "data is back here now");
+	    console.log( data );
+        }, "json");
+    clearUserMarker();
 }
 
 
