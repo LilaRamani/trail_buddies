@@ -57,13 +57,16 @@ function createHikeMark(hike)
     var marker = new google.maps.Marker({
 	    map: map,
 	    position: loc,
-	    title: hike.hike_name
+	    title: hike.hike_name,
         });
     var participants = "";
 
     for (var i = 0; i < hike.participants.length; i++) {
 	participants += hike.participants[i] + ", ";
     }
+
+    //$('#latOfHike').val(marker.getPosition().lat());
+    //$('#lngOfHike').val(marker.getPosition().lng());
 
     //Includes the new button now:
     var theContent = marker.title + "</br>" + "With: " + participants + "</br>" +
@@ -76,9 +79,19 @@ function createHikeMark(hike)
 	content: theContent,
     });
 
+    //$.get("http://ancient-lake-4187.herokuapp.com/", function(data) {
+    //for(var j = 0; j < data.length; j++) {
+    //createHikeMark(data[j]);
+    //}
+    //}, "json");
 
     google.maps.event.addListener(marker, 'click', function(){
-	    JOINinfowindow.close();
+	    JOINinfowindow.close();/*
+      	    $.get("http://ancient-lake-4187.herokuapp.com/", function(data) {
+		   for(var j = 0; j < data.length; j++) {
+		       createHikeMark(data[j]);
+		   }
+		   }, "json");*/
       	    JOINinfowindow.setContent(theContent);//Set content with button each time
 	    JOINinfowindow.open(map,this);
 	});
@@ -210,7 +223,8 @@ function submit_joinhike() {
 	    console.log( "data is back here now");
 	    console.log( data );
         }, "json");
-    clearUserMarker();
+    //    clearUserMarker();
+    //TODO: insert function call here to re-get and display whats in this window
 }
 
 
