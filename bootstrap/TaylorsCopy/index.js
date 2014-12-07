@@ -22,7 +22,7 @@ function initialize() {
                 placeMarker(e.latLng, map);
         });
 }
-
+/*
 function createHikeMark(hike)
 {
         var loc = new google.maps.LatLng(hike.lat, hike.lng);
@@ -37,16 +37,59 @@ function createHikeMark(hike)
             participants += hike.participants[i] + ", ";
         }
 
-        var content = marker.title + "</br>" + "With: " + participants + "</br>" +
-                              hike.descript;
+        var content = marker.title + "</br>" + "With: " + participants + "</br>" +   hike.descript;
 
-        var infowindow = new google.maps.InfoWindow();
+        var infowindow = new google.maps.InfoWindow(); 
+
+
         google.maps.event.addListener(marker, 'click', function() {
                 infowindow.close();
                 infowindow.setContent(content);
                 infowindow.open(map, this);
         });
 }
+*/
+//TAylors version
+
+function createHikeMark(hike)
+{
+    var loc = new google.maps.LatLng(hike.lat, hike.lng);
+    var marker = new google.maps.Marker({
+	    map: map,
+	    position: loc,
+	    title: hike.hike_name
+        });
+    var participants = "";
+
+    for (var i = 0; i < hike.participants.length; i++) {
+	participants += hike.participants[i] + ", ";
+    }
+    var theContent = participants + "<button data-toggle=\"modal\" data-target=\"#myModal\">Add hike</button>";
+
+
+    //TAYLOR:                                                                                                               
+        JOINinfowindow = new google.maps.InfoWindow({
+		    	    content: participants + "<button data-toggle=\"modal\" data-target=\"#myModal\">Add hike</button>",
+		//		content: theContent,
+    	});
+
+
+	JOINinfowindow.open(map,marker);
+    google.maps.event.addListener(marker, 'click', function(){
+	    JOINinfowindow.close();
+	    //  JOINinfowindow.setContent(participants);
+	    	    JOINinfowindow.setContent(theContent);
+	    JOINinfowindow.open(map,this);
+	});
+    //    google.maps.event.addListener(JOINinfowindow, 'closeclick', function(){
+    //	    JOINinfowindow.close();
+    //	});
+
+
+    //ENDTAYLOR^                                                                                                            
+  
+}
+
 
 function placeMarker(position, map) {
 
@@ -80,7 +123,9 @@ function clearUserMarker () {
 function addInfoWindow(marker) {
 
         GLOBALinfowindow = new google.maps.InfoWindow({
-                content: "<button data-toggle=\"modal\" data-target=\"#myModal\">Add hike</button>",
+		//                content: "<button data-toggle=\"modal\" data-target=\"#myModal\">Add hike</button>",
+                content: "<button data-toggle=\"modal\" data-target=\"#myModal\">Add hike</button>" + "Yes",          
+
         });
 
         GLOBALinfowindow.open(map,marker);
