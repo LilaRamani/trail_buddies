@@ -223,12 +223,13 @@ function submit_joinhike() {
 
         console.log( "data is back here now");
         console.log( data );
-        $.get("http://ancient-lake-4187.herokuapp.com/", function(data) {
+    /*change the server so that it returns all of the data and then we can just use the data to display again*/
+    /*    $.get("http://ancient-lake-4187.herokuapp.com/", function(data) {
                 console.log("hey");
                 for(var j = 0; j < data.length; j++) {
                         createHikeMark(data[j]);
                 }
-        }, "json");
+        }, "json");*/
     }, "json");
     clearUserMarker();
 }
