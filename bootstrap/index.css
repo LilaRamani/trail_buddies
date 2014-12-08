@@ -29,3 +29,19 @@ body {
 .popover {
         width: 160px;
 }
+
+#hour, #minute {
+        width: 30px;
+}
+
+#hike_am_pm {
+        width: 60px;
+}
+
+#hour {
+        margin-left: 10%;
+}
+
+.datetimeselect {
+        float: left;
+}

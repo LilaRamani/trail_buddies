@@ -37,8 +37,7 @@
 
 
 <!-- Modal2 JoinHike -->
-
-<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> <!-- Changed myModal to myModal2 -->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><!-- Different (MyModal2 instead of MyModal)-->
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -48,14 +47,15 @@
             <form id="joinhikeform">
                 <div class="modal-body">
 
-                   
+                    <!-- personal info -->
                     <input type="text" name="name" class="form-control" placeholder="Name">
                     <input type="text" name="email" class="form-control" placeholder="Email address">
                     <br>
                     <br>
 
-   <!--                
                    Hike length (miles)<select disabled name="hike_length" class="form-control" id="Hikelength"> 
+
+
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
@@ -103,25 +103,28 @@
                     </select>
                     <input type="text" name="start_date" class="form-control" id="startDateJoin" placeholder="Start date/time add datepicker" readonly>
                     <input type="text" name="end_date" class="form-control" id="endDateJoin" placeholder="End date/time   add datepicker" readonly>
--->
+
                     <input type="text" name="idHike" class="form-control" id="IdofHike" value="2">                                                                     
+
 
 <!--
 		    <input type="text" name="idHike" class="form-control" id="IdofHike">
 -->
 <!--
                     Selected Latitude
+
                     <input type="text" name="lat" id="latOfHike" class="form-control"  value="20" readonly>
                     Selected Longitude
                     <input type="text" name="lng" id="lngOfHike" class="form-control"  value="-44" readonly>
                     <textarea readonly rows=7  name="description"  id="descriptionJoin" type="text" class="form-control" placeholder="Description"></textarea>
 -->
+
                 </div>
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button id="submitjoinhike" type="button" onclick="submit_joinhike()" data-dismiss="modal" class="btn btn-primary">Save changes</button>
-                </div> <!-- CHanged id to submitjoinhike and onlick to sibmit_joinhike() -->
+                </div> <!-- Changed submitaddhike to submitjoinhike, changed submit_addhike() to submit_joinhike() -->
             </form>
         </div>
     </div>

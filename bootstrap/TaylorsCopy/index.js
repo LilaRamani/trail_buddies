@@ -57,7 +57,7 @@ function createHikeMark(hike)
     var marker = new google.maps.Marker({
 	    map: map,
 	    position: loc,
-	    title: hike.hike_name,
+	    title: hike.hike_name
         });
     var participants = "";
 
@@ -84,6 +84,7 @@ var theContent = "<html><head><style>h2{text-align:center; color:green;}#invisib
 
 
     google.maps.event.addListener(marker, 'click', function(){
+
 	    	    JOINinfowindow.close();
 	    //!!!!IMPORTANT NOTE: 82 is the exact length of the string characters that appear
 	    //    in front of the IDofHike as it is exactly now stored within theContent.!!!!!!!
@@ -100,10 +101,12 @@ var theContent = "<html><head><style>h2{text-align:center; color:green;}#invisib
 		   }
 		   }, "json");
 	    */
+
       	    JOINinfowindow.setContent(theContent);//Set content with button each time
 	    JOINinfowindow.open(map,this);
 	});
 }
+
 
 
 //Takes in: startIndex: the index position of the string that is the first character of the desired substring,
@@ -127,6 +130,7 @@ function setJoinHikeFormData(hike) {
     $('#lngOfHike').val(hike.lng);
   
 }
+
 
 function placeMarker(position, map) {
 
@@ -245,13 +249,13 @@ function submit_addhike() {
 function submit_joinhike() {
     //need to change some of the variable names so that the post request will work                                                                                           
     var formData = $('#joinhikeform').serialize();
+
     console.log("Form data is: " + formData);
     $.post( "http://ancient-lake-4187.herokuapp.com/joinHikeTaylor", formData, function( data ) {
 	    console.log( "data is back here now");
 	    console.log( data );
         }, "json");
-    //    clearUserMarker();
-    //TODO: insert function call here to re-get and display whats in this window
+    clearUserMarker();
 }
 
 
