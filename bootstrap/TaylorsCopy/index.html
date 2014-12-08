@@ -43,9 +43,9 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="myModalLabel2">Join a hike</h4> <!-- myModalLabel to myModalLabel2, and changed to Join a hike -->
+                <h4 class="modal-title" id="myModalLabel2">Join this hike</h4>
             </div>
-            <form id="joinhikeform"> <!-- Changed this -->
+            <form id="joinhikeform">
                 <div class="modal-body">
 
                    
@@ -54,8 +54,8 @@
                     <br>
                     <br>
 
-                   
-                   Hike length (miles)<select disabled name="hike_length" class="form-control" id="Hikelength"> <!-- changed from length to Hikelength-->
+   <!--                
+                   Hike length (miles)<select disabled name="hike_length" class="form-control" id="Hikelength"> 
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
@@ -103,14 +103,20 @@
                     </select>
                     <input type="text" name="start_date" class="form-control" id="startDateJoin" placeholder="Start date/time add datepicker" readonly>
                     <input type="text" name="end_date" class="form-control" id="endDateJoin" placeholder="End date/time   add datepicker" readonly>
-		    <!-- Added id fields to both of the date input boxes -->
+-->
+                    <input type="text" name="idHike" class="form-control" id="IdofHike" value="2">                                                                     
 
+<!--
+		    <input type="text" name="idHike" class="form-control" id="IdofHike">
+-->
+<!--
                     Selected Latitude
-                    <input type="text" name="lat" id="latOfHike" class="form-control"  value="20" readonly><!-- Changed hikeLat to latOfHike -->
+                    <input type="text" name="lat" id="latOfHike" class="form-control"  value="20" readonly>
                     Selected Longitude
-                    <input type="text" name="lng" id="lngOfHike" class="form-control"  value="-44" readonly><!-- changed to lngOfHike -->
+                    <input type="text" name="lng" id="lngOfHike" class="form-control"  value="-44" readonly>
                     <textarea readonly rows=7  name="description"  id="descriptionJoin" type="text" class="form-control" placeholder="Description"></textarea>
-                </div><!--Added an id field and gave it "descriptJoin" -->
+-->
+                </div>
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -84,7 +84,7 @@ var theContent = "<html><head><style>h2{text-align:center; color:green;}#invisib
 
 
     google.maps.event.addListener(marker, 'click', function(){
-	    	    JOINinfowindow.close();
+	    //	    JOINinfowindow.close();
 	    //!!!!IMPORTANT NOTE: 82 is the exact length of the string characters that appear
 	    //    in front of the IDofHike as it is exactly now stored within theContent.!!!!!!!
 	    var theID = findSubstring(118, "ENDOFID", JOINinfowindow.content);
