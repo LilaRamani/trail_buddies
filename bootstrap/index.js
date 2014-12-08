@@ -48,8 +48,16 @@ function MyLocation()
 function renderMap()
 {
         me = new google.maps.LatLng(myLat, myLng);
-        
         map.panTo(me);
+        map.setZoom(8);
+
+        var image = 'small_blue_ball.png';
+        var marker = new google.maps.Marker({
+              position: me,
+              map: map,
+              icon: image
+        });
+
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
@@ -135,7 +143,7 @@ function clearUserMarker () {
 function addInfoWindow(marker) {
 
         GLOBALinfowindow = new google.maps.InfoWindow({
-                content: "<button data-toggle=\"modal\" data-target=\"#myModal\">Add hike</button>",
+                content: "<button data-toggle=\"modal\" data-target=\"#myModal\">Add hike</button>"
         });
 
         GLOBALinfowindow.open(map,marker);
@@ -168,5 +176,19 @@ function submit_addhike() {
         clearUserMarker();
 }
 
+// add open datepicker in add hike modal
+$(function() {
+        $( "#datepicker" ).datepicker({ minDate: 0});
+});
 
+$(function() {
+        $( "#datepicker1" ).datepicker({ minDate: 0});
+});
 
+/*
+ *  filter results get requests
+ */
+
+$(".filterlength").change( function() {
+        console.log("field changed");                            
+});
