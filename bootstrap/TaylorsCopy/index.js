@@ -22,33 +22,7 @@ function initialize() {
                 placeMarker(e.latLng, map);
         });
 }
-/*
-function createHikeMark(hike)
-{
-        var loc = new google.maps.LatLng(hike.lat, hike.lng);
-        var marker = new google.maps.Marker({
-                map: map,
-                position: loc,
-                title: hike.hike_name
-        });
-        var participants = "";
 
-        for (var i = 0; i < hike.participants.length; i++) {
-            participants += hike.participants[i] + ", ";
-        }
-
-        var content = marker.title + "</br>" + "With: " + participants + "</br>" +   hike.descript;
-
-        var infowindow = new google.maps.InfoWindow(); 
-
-
-        google.maps.event.addListener(marker, 'click', function() {
-                infowindow.close();
-                infowindow.setContent(content);
-                infowindow.open(map, this);
-        });
-}
-*/
 
 //This is the new version of this function, which now it includes the button:
 function createHikeMark(hike)
@@ -68,16 +42,16 @@ function createHikeMark(hike)
     }
 
 
-var theContent = "<html><head><style>h2{text-align:center; color:green;}#invisible{display:none;}</style></head><body>" +"<p id='invisible'>" + hike._id +"ENDOFID" +  "</p>" + "<h2>"  + hike.hike_name+" </h2>" + "<p><b>" + "Participants:</b> " + 
+    var theContent = "<html><head><style>h2{text-align:center; color:green;}#invisible{display:none;}</style></head><body>" +"<p id='invisible'>" + hike._id +"ENDOFID" +  "</p>" + "<h2>"  + hike.hike_name+" </h2>" + "<p><b>" + "Participants:</b> " + 
     participants + "<p><b>Date of Hike: </b>" + hike.start_date + "<p><b>Time: </b>" + /*hike.hour + ":" hike.minute + " " + hike.am_pm +*/ "</p><p><b>Description: </b>" 
     + hike.descript + "</p></body></html>" + "<button data-toggle=\"modal\" data-target=\"#myModal2\">Join hike</button>";
 
-var marker = new google.maps.Marker({
-	map: map,
-	position: loc,
-	title: hike.hike_name,
-	holdThis: theContent
-    });
+     var marker = new google.maps.Marker({
+	   map: map,
+	   position: loc,
+	   title: hike.hike_name,
+	   holdThis: theContent
+      });
 
     //Set initial content to include button 
     JOINinfowindow = new google.maps.InfoWindow({
@@ -86,23 +60,11 @@ var marker = new google.maps.Marker({
 
 
     google.maps.event.addListener(marker, 'click', function(){
+	    JOINinfowindow.close();
+	    var theID = findSubstring(118, "ENDOFID", marker.holdThis);
 
-
-	    	    JOINinfowindow.close();
-		    var theID = findSubstring(118, "ENDOFID", marker.holdThis);
-		    //var theID = findSubstring(118, "ENDOFID", JOINinfowindow.content);
-
-		    $('#IdofHike').val(theID);
-		    console.log("The id is: " + theID);
-		   
-	    //!!!!IMPORTANT NOTE: 82 is the exact length of the string characters that appear
-	    //    in front of the IDofHike as it is exactly now stored within theContent.!!!!!!!
-      	    //var theID = findSubstring(118, "ENDOFID", JOINinfowindow.content);
-	    //$('#IdofHike').val(theID);
-	    //console.log("THEstuff");
-	    //console.log("Join: " + JOINinfowindow.content);
-	    //console.log("theID" + theID);
-	   
+	    $('#IdofHike').val(theID);
+	    console.log("The id is: " + theID);
 		    
 	    console.log($('#IdofHike'));
 	   
