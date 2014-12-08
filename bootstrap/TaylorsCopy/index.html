@@ -37,25 +37,24 @@
 
 
 <!-- Modal2 JoinHike -->
-
-<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> <!-- Changed myModal to myModal2 -->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><!-- Different (MyModal2 instead of MyModal)-->
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="myModalLabel2">Join a hike</h4> <!-- myModalLabel to myModalLabel2, and changed to Join a hike -->
+                <h4 class="modal-title" id="myModalLabel">Join a hike</h4> <!-- Different -->
             </div>
-            <form id="joinhikeform"> <!-- Changed this -->
+            <form id="joinhikeform"><!-- Different -->
                 <div class="modal-body">
 
-                   
+                    <!-- personal info -->
                     <input type="text" name="name" class="form-control" placeholder="Name">
                     <input type="text" name="email" class="form-control" placeholder="Email address">
                     <br>
                     <br>
 
-                   
-                   Hike length (miles)<select disabled name="hike_length" class="form-control" id="Hikelength"> <!-- changed from length to Hikelength-->
+                    <!-- hike info -->
+                   Hike length (miles)<select disabled name="hike_length" class="form-control" id="length">
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
@@ -101,21 +100,20 @@
                         <option>15</option>
                         <option>20</option>
                     </select>
-                    <input type="text" name="start_date" class="form-control" id="startDateJoin" placeholder="Start date/time add datepicker" readonly>
-                    <input type="text" name="end_date" class="form-control" id="endDateJoin" placeholder="End date/time   add datepicker" readonly>
-		    <!-- Added id fields to both of the date input boxes -->
+                    <input type="text" name="start_date" class="form-control" placeholder="Start date/time add datepicker" readonly>
+                    <input type="text" name="end_date" class="form-control" placeholder="End date/time   add datepicker" readonly>
 
                     Selected Latitude
-                    <input type="text" name="lat" id="latOfHike" class="form-control"  value="20" readonly><!-- Changed hikeLat to latOfHike -->
+                    <input type="text" name="lat" id="hikeLat" class="form-control"  value="20" readonly>
                     Selected Longitude
-                    <input type="text" name="lng" id="lngOfHike" class="form-control"  value="-44" readonly><!-- changed to lngOfHike -->
-                    <textarea readonly rows=7  name="description"  id="descriptionJoin" type="text" class="form-control" placeholder="Description"></textarea>
-                </div><!--Added an id field and gave it "descriptJoin" -->
+                    <input type="text" name="lng" id="hikeLng" class="form-control"  value="-44" readonly>
+                    <textarea readonly rows=7  name="description" type="text" class="form-control" placeholder="Description"></textarea>
+                </div>
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button id="submitjoinhike" type="button" onclick="submit_joinhike()" data-dismiss="modal" class="btn btn-primary">Save changes</button>
-                </div> <!-- CHanged id to submitjoinhike and onlick to sibmit_joinhike() -->
+                </div> <!-- Changed submitaddhike to submitjoinhike, changed submit_addhike() to submit_joinhike() -->
             </form>
         </div>
     </div>
