@@ -14,10 +14,12 @@ function initialize() {
         mapOptions);
         MyLocation();
         $.get("http://ancient-lake-4187.herokuapp.com/", function(data) {
-                for(var j = 0; j < data.length; j++) {
+                createHikeMark(data[0]);
+                /*for(var j = 0; j < data.length; j++) {
                         createHikeMark(data[j]);
-                }
+                }*/
         }, "json");
+
         google.maps.event.addListener(map, 'rightclick', function(e) {
                 placeMarker(e.latLng, map);
         });
@@ -53,11 +55,13 @@ function createHikeMark(hike)
 //This is the new version of this function, which now it includes the button:
 function createHikeMark(hike)
 {
+    console.log(hike);
+
     var loc = new google.maps.LatLng(hike.lat, hike.lng);
     var marker = new google.maps.Marker({
 	    map: map,
 	    position: loc,
-	    title: hike.hike_name
+	    title: "elliot title"
         });
     var participants = "";
 
