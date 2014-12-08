@@ -1,17 +1,16 @@
 var map;
-var myLat = 41;
-var myLng = -120;
+var myLat = 0;
+var myLng = -100;
 var me = new google.maps.LatLng(myLat, myLng);
 var GLOBALmarker;
 var GLOBALinfowindow;
 var mapOptions = {
         center: me,
-        zoom: 8
+        zoom: 2
 };
 
 function initialize() {
-        map = new google.maps.Map(document.getElementById('map_canvas'),
-        mapOptions);
+        map = map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
         MyLocation();
         $.get("http://ancient-lake-4187.herokuapp.com/", function(data) {
                 for(var j = 0; j < data.length; j++) {
