@@ -54,11 +54,13 @@ function createHikeMark(hike)
 function createHikeMark(hike)
 {
     var loc = new google.maps.LatLng(hike.lat, hike.lng);
+    /*
     var marker = new google.maps.Marker({
 	    map: map,
 	    position: loc,
 	    title: hike.hike_name
         });
+    */
     var participants = "";
 
     for (var i = 0; i < hike.participants.length; i++) {
@@ -66,16 +68,16 @@ function createHikeMark(hike)
     }
 
 
-    var IDofHike = hike._id;
-    //Includes the button and the hidden field for ID.
-    /* 
-    var theContent = "<!DOCTYPE html><html><head></head><body><input type='hidden' name='hikeID' value=" +
-	IDofHike+"ENDOFID"+ "></body></html>" + marker.title + "</br>" + "With: " + participants + "</br>" +
-        hike.descript + "</br>"+ "<button data-toggle=\"modal\" data-target=\"#myModal2\">Join hike</button>";
-    */
 var theContent = "<html><head><style>h2{text-align:center; color:green;}#invisible{display:none;}</style></head><body>" +"<p id='invisible'>" + hike._id +"ENDOFID" +  "</p>" + "<h2>"  + hike.hike_name+" </h2>" + "<p><b>" + "Participants:</b> " + 
     participants + "<p><b>Date of Hike: </b>" + hike.start_date + "<p><b>Time: </b>" + /*hike.hour + ":" hike.minute + " " + hike.am_pm +*/ "</p><p><b>Description: </b>" 
     + hike.descript + "</p></body></html>" + "<button data-toggle=\"modal\" data-target=\"#myModal2\">Join hike</button>";
+
+var marker = new google.maps.Marker({
+	map: map,
+	position: loc,
+	title: hike.hike_name,
+	holdThis: theContent
+    });
 
     //Set initial content to include button 
     JOINinfowindow = new google.maps.InfoWindow({
@@ -87,23 +89,23 @@ var theContent = "<html><head><style>h2{text-align:center; color:green;}#invisib
 
 
 	    	    JOINinfowindow.close();
+		    var theID = findSubstring(118, "ENDOFID", marker.holdThis);
+		    //var theID = findSubstring(118, "ENDOFID", JOINinfowindow.content);
+
+		    $('#IdofHike').val(theID);
+		    console.log("The id is: " + theID);
+		   
 	    //!!!!IMPORTANT NOTE: 82 is the exact length of the string characters that appear
 	    //    in front of the IDofHike as it is exactly now stored within theContent.!!!!!!!
-	    var theID = findSubstring(118, "ENDOFID", JOINinfowindow.content);
-	    $('#IdofHike').val(theID);
-	    console.log("THEstuff");
-	    console.log("Join: " + JOINinfowindow.content);
-	    console.log("theID" + theID);
-	    
+      	    //var theID = findSubstring(118, "ENDOFID", JOINinfowindow.content);
+	    //$('#IdofHike').val(theID);
+	    //console.log("THEstuff");
+	    //console.log("Join: " + JOINinfowindow.content);
+	    //console.log("theID" + theID);
+	   
+		    
 	    console.log($('#IdofHike'));
-	    /*       	    $.get("http://ancient-lake-4187.herokuapp.com/", function(data) {
-		   for(var j = 0; j < data.length; j++) {
-		       //setJoinHikeFormData(data[j]);
-		   }
-		   }, "json");
-	    */
-
-
+	   
       	    JOINinfowindow.setContent(theContent);//Set content with button each time
 	    JOINinfowindow.open(map,this);
 	});
