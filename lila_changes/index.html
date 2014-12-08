@@ -14,6 +14,8 @@
 
     <link rel="stylesheet" href="index.css" />
     <script type="text/javascript" src="index.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+    <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 
     <title>Trail Buddies Template</title>
 
@@ -28,12 +30,117 @@
                     <li><a class="navbar-brand" href="#"><img alt="Trail Buddies" src="mtn.png"></a></li>
                     <li><a class="navbar-brand" href="#">Trail Buddies</a></li>
                     <li><a id="addhikelink" data-toggle="popover" data-placement="bottom" data-content="Right click on the map to add a hike." href="#">Add a Hike</a></li>
+                    <li><a data-toggle="collapse" data-target="#demo" aria-expanded="false" aria-controls="demo" href="#">Filter</a></li>
+
                 </ul>
             </div>
         </div>
     </nav>
 
+    <div id="demo" class="collapse">
+        <h5>Hike Length</h5>
+        <p>Min: <input type="text" class="filterlength" id="filterminlength" class="form-control">
+        Max: <input type="text" class="filterlength" id="filtermaxlength" class="form-control"></p>
+    </div>
 
+
+<!-- Modal2 JoinHike -->
+
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+
+                <h4 class="modal-title" id="myModalLabel2">Join this hike</h4>
+            </div>
+            <form id="joinhikeform">
+
+                <div class="modal-body">
+
+                    <!-- personal info -->
+                    <input type="text" name="name" class="form-control" placeholder="Name">
+                    <input type="text" name="email" class="form-control" placeholder="Email address">
+                    <br>
+                    <br>
+<!--
+                   Hike length (miles)<select disabled name="hike_length" class="form-control" id="Hikelength"> 
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                        <option>11</option>
+                        <option>12</option>
+                        <option>13</option>
+                        <option>14</option>
+                        <option>15</option>
+                        <option>16</option>
+                        <option>17</option>
+                        <option>18</option>
+                        <option>19</option>
+                        <option>20</option>
+                        <option>21</option>
+                        <option>22</option>
+                        <option>23</option>
+                        <option>24</option>
+                        <option>25</option>
+                        <option>26</option>
+                        <option>27</option>
+                        <option>28</option>
+                        <option>29</option>
+                        <option>30</option>
+                    </select> 
+                    Max group members<select disabled name="max_hikers" class="form-control">
+                        <option>none</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                        <option>15</option>
+                        <option>20</option>
+                    </select>
+                    <input type="text" name="start_date" class="form-control" id="startDateJoin" placeholder="Start date/time add datepicker" readonly>
+                    <input type="text" name="end_date" class="form-control" id="endDateJoin" placeholder="End date/time   add datepicker" readonly>
+-->
+
+                    <input type="text" name="idHike" class="form-control" id="IdofHike" value="2">                                                                     
+
+
+<!--
+            <input type="text" name="idHike" class="form-control" id="IdofHike">
+-->
+<!--
+                    Selected Latitude
+                    <input type="text" name="lat" id="latOfHike" class="form-control"  value="20" readonly>
+                    Selected Longitude
+                    <input type="text" name="lng" id="lngOfHike" class="form-control"  value="-44" readonly>
+                    <textarea readonly rows=7  name="description"  id="descriptionJoin" type="text" class="form-control" placeholder="Description"></textarea>
+-->
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button id="submitjoinhike" type="button" onclick="submit_joinhike()" data-dismiss="modal" class="btn btn-primary">Save changes</button>
+                </div> <!-- Changed submitaddhike to submitjoinhike, changed submit_addhike() to submit_joinhike() -->
+            </form>
+        </div>
+    </div>
+</div>
+
+
+            
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -41,6 +148,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title" id="myModalLabel">Add a hike</h4>
+                <input type="text" id="filterLength" class="form-control" value+"All">
             </div>
             <form id="addhikeform">
                 <div class="modal-body">
@@ -51,8 +159,28 @@
                     <br>
                     <br>
 
-
                     <!-- hike info -->
+
+                    <div>
+                        <!-- Start time/date -->
+                        <input type="text" class="datetimeselect" id="datepicker" name="start_date" class="form-control" placeholder="Start date">
+
+                        <input type="text" name="hour" class="datetimeselect" id="hour" maxlength="2" class="form-control"  value="10">
+                        <p class="datetimeselect">:</p>
+                        <input type="text" name="minute" class="datetimeselect" id="minute" maxlength="2" class="form-control"  value="00">
+                        <select name="am_pm" class="datetimeselect" id="hike_am_pm" class="form-control">
+                            <option>AM</option>
+                            <option>PM</option>
+                        </select>
+                    </div>
+                    <br>
+                    <br>
+
+                    Selected Latitude
+                    <input type="text" name="lat" id="hikeLat" class="form-control"  value="20">
+                    Selected Longitude
+                    <input type="text" name="lng" id="hikeLng" class="form-control"  value="-44">
+
                     Hike length (miles)<select name="hike_length" class="form-control" id="length">
                         <option>1</option>
                         <option>2</option>
@@ -99,12 +227,7 @@
                         <option>15</option>
                         <option>20</option>
                     </select>
-                    <input type="text" name="start_date" class="form-control" placeholder="Start date/time add datepicker">
-                    <input type="text" name="end_date" class="form-control" placeholder="End date/time   add datepicker">
-                    Selected Latitude
-                    <input type="text" name="lat" id="hikeLat" class="form-control"  value="20">
-                    Selected Longitude
-                    <input type="text" name="lng" id="hikeLng" class="form-control"  value="-44">
+
                     <textarea rows=7  name="description" type="text" class="form-control" placeholder="Description"></textarea>
                 </div>
 
