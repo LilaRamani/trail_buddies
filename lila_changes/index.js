@@ -58,7 +58,7 @@ function createHikeMark(hike)
     google.maps.event.addListener(marker, 'click', function(){
         JOINinfowindow.close();
         var theID = findSubstring(118, "ENDOFID", marker.holdThis);
-        
+
         $('#IdofHike').val(theID);
                
         JOINinfowindow.setContent(theContent);//Set content with button each time
@@ -197,7 +197,6 @@ $(function() {
 function submit_addhike() {
         //need to change some of the variable names so that the post request will work
         var formData = $('#addhikeform').serialize();
-        console.log(formData);
         $.post( "http://ancient-lake-4187.herokuapp.com/sendLocation", formData, function( data ) {
                 console.log( "data is back!");
                 console.log( data );
@@ -212,7 +211,6 @@ function submit_joinhike() {
     var formData = $('#joinhikeform').serialize();
 
 
-    console.log("Form data is: " + formData);
     $.post( "http://ancient-lake-4187.herokuapp.com/joinHikeTaylor", formData, function( data ) {
 
         console.log( "data is back here now");
