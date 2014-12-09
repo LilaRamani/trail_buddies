@@ -195,6 +195,9 @@ $(function() {
 
 // called when add hike "save changes" button is clicked
 function submit_addhike() {
+    if ($("input[name='name']").val() == '' || $("input[name='email']").val() == '' || $("input[name='start_date']").val() == '') {
+        alert("ALL FIELDS ARE REQUIRED");
+    } else {
         //need to change some of the variable names so that the post request will work
         var formData = $('#addhikeform').serialize();
         $.post( "http://ancient-lake-4187.herokuapp.com/sendLocation", formData, function( data ) {
@@ -206,22 +209,24 @@ function submit_addhike() {
                 }, "json");
         }, "json");
         clearUserMarker();
+    }
 }
 
 
 //called when "add hike" button is clicked from Join Hike
 function submit_joinhike() {
-    //need to change some of the variable names so that the post request will work                                                                                           
-    var formData = $('#joinhikeform').serialize();
-
-
-    $.post( "http://ancient-lake-4187.herokuapp.com/joinHikeTaylor", formData, function( data ) {
-                /* immediatedly get all the data after the hike is added so marker appears */
-                $.get("http://ancient-lake-4187.herokuapp.com/", function(returned) {
-                    for(var i = 0; i < returned.length; i++) {
-                        createHikeMark(returned[i]);
-                    }
-                }, "json");
-    }, "json");
-    clearUserMarker();
+    if ($("input[name='name']").val() == '' || $("input[name='email']").val() == '') {
+        alert("ALL FIELDS ARE REQUIRED");
+    } else {
+        var formData = $('#joinhikeform').serialize();
+        $.post( "http://ancient-lake-4187.herokuapp.com/joinHikeTaylor", formData, function( data ) {
+                    /* immediatedly get all the data after the hike is added so marker appears */
+                    $.get("http://ancient-lake-4187.herokuapp.com/", function(returned) {
+                        for(var i = 0; i < returned.length; i++) {
+                            createHikeMark(returned[i]);
+                        }
+                    }, "json");
+        }, "json");
+        clearUserMarker();
+    }
 }
