@@ -27,22 +27,19 @@ function initialize() {
 function createHikeMark(hike)
 {
     var loc = new google.maps.LatLng(hike.lat, hike.lng);
-    /*
-    var marker = new google.maps.Marker({
-        map: map,
-        position: loc,
-        title: hike.hike_name
-        });
-    */
+    
     var participants = "";
-
+    /* make a list of participants to display */
     for (var i = 0; i < hike.participants.length; i++) {
-    participants += hike.participants[i] + ", ";
+        if (i == hike.participants.length - 1) {
+            participants += hike.participants[i];
+        } else {
+            participants += hike.participants[i] + ", ";
+        }
     }
-
-
+    /* create and format info window content */
     var theContent = "<html><head><style>h2{text-align:center; color:green;}#invisible{display:none;}</style></head><body>" +"<p id='invisible'>" + hike._id +"ENDOFID" +  "</p>" + "<h2>"  + hike.hike_name+" </h2>" + "<p><b>" + "Participants:</b> " + 
-    participants + "<p><b>Date of Hike: </b>" + hike.start_date + "<p><b>Time: </b>" + /*hike.hour + ":" hike.minute + " " + hike.am_pm +*/ "</p><p><b>Description: </b>" 
+    participants + "<p><b>Date of Hike: </b>" + hike.start_date + "</p><p><b>Time: </b>" + hike.hour + ":" + hike.minute + " " + hike.am_pm + "</p><p><b>Description: </b>" 
     + hike.descript + "</p></body></html>" + "<button data-toggle=\"modal\" data-target=\"#myModal2\">Join hike</button>";
 
      var marker = new google.maps.Marker({
@@ -61,13 +58,10 @@ function createHikeMark(hike)
     google.maps.event.addListener(marker, 'click', function(){
         JOINinfowindow.close();
         var theID = findSubstring(118, "ENDOFID", marker.holdThis);
-
+        
         $('#IdofHike').val(theID);
-        console.log("The id is: " + theID);
-            
-        console.log($('#IdofHike'));
-       
-            JOINinfowindow.setContent(theContent);//Set content with button each time
+               
+        JOINinfowindow.setContent(theContent);//Set content with button each time
         JOINinfowindow.open(map,this);
     });
 }
