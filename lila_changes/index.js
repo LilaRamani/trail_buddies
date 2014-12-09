@@ -198,8 +198,12 @@ function submit_addhike() {
         //need to change some of the variable names so that the post request will work
         var formData = $('#addhikeform').serialize();
         $.post( "http://ancient-lake-4187.herokuapp.com/sendLocation", formData, function( data ) {
-                console.log( "data is back!");
-                console.log( data );
+                /* immediatedly get all the data after the hike is added so marker appears */
+                $.get("http://ancient-lake-4187.herokuapp.com/", function(returned) {
+                    for(var i = 0; i < returned.length; i++) {
+                        createHikeMark(returned[i]);
+                    }
+                }, "json");
         }, "json");
         clearUserMarker();
 }
@@ -212,16 +216,12 @@ function submit_joinhike() {
 
 
     $.post( "http://ancient-lake-4187.herokuapp.com/joinHikeTaylor", formData, function( data ) {
-
-        console.log( "data is back here now");
-        console.log( data );
-    /*change the server so that it returns all of the data and then we can just use the data to display again*/
-    /*    $.get("http://ancient-lake-4187.herokuapp.com/", function(data) {
-                console.log("hey");
-                for(var j = 0; j < data.length; j++) {
-                        createHikeMark(data[j]);
-                }
-        }, "json");*/
+                /* immediatedly get all the data after the hike is added so marker appears */
+                $.get("http://ancient-lake-4187.herokuapp.com/", function(returned) {
+                    for(var i = 0; i < returned.length; i++) {
+                        createHikeMark(returned[i]);
+                    }
+                }, "json");
     }, "json");
     clearUserMarker();
 }
