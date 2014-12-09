@@ -13,9 +13,9 @@ function initialize() {
         map = map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
         MyLocation();
         $.get("http://ancient-lake-4187.herokuapp.com/", function(data) {
-                for(var j = 0; j < data.length; j++) {
-                        createHikeMark(data[j]);
-                }
+            for(var j = 0; j < data.length; j++) {
+               createHikeMark(data[j]);
+            }
         }, "json");
         google.maps.event.addListener(map, 'rightclick', function(e) {
                 placeMarker(e.latLng, map);
@@ -37,6 +37,11 @@ function createHikeMark(hike)
             participants += hike.participants[i] + ", ";
         }
     }
+    /* get weather forecast for this location */
+    $.get("http://ancient-lake-4187.herokuapp.com/weather.json?lat=" + hike.lat + "&lng=" + hike.lng, function(weather_data) {
+        console.log(weather_data);
+    }, "json");
+
     /* create and format info window content */
     var theContent = "<html><head><style>h2{text-align:center; color:green;}#invisible{display:none;}</style></head><body>" +"<p id='invisible'>" + hike._id +"ENDOFID" +  "</p>" + "<h2>"  + hike.hike_name+" </h2>" + "<p><b>" + "Participants:</b> " + 
     participants + "<p><b>Date of Hike: </b>" + hike.start_date + "</p><p><b>Time: </b>" + hike.hour + ":" + hike.minute + " " + hike.am_pm + "</p><p><b>Description: </b>" 
@@ -49,9 +54,9 @@ function createHikeMark(hike)
        holdThis: theContent
       });
 
-    //Set initial content to include button 
+    /* Set initial content to include button */
     JOINinfowindow = new google.maps.InfoWindow({
-    content: theContent,
+        content: theContent,
     });
 
 
@@ -102,7 +107,7 @@ function placeMarker(position, map) {
                 map: map
         });
 
-        // set lat and lng values in add hike input field
+        /* set lat and lng values in add hike input field */
         $('#hikeLat').val(GLOBALmarker.getPosition().lat());
         $('#hikeLng').val(GLOBALmarker.getPosition().lng());
 
@@ -173,16 +178,6 @@ function renderMap()
 }
 google.maps.event.addDomListener(window, 'load', initialize);
 
-
-/*$(document).ready(function() {
-        $.ajax({
-                dataType: 'json',
-                url: "https://api.forecast.io/forecast/200e4b0adde1dcf733e2eca4b88066ab/37.8267,-122.423",
-                success: function($weatherData) {
-                       console.log($weatherData);
-                }
-        });
-});*/
 
 $(function () {
         $('[data-toggle="popover"]').popover();
