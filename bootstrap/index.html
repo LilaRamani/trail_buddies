@@ -12,11 +12,12 @@
     <script src="js/bootstrap.min.js"></script>
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="index.css" />
-    <script type="text/javascript" src="index.js"></script>
-
+    <!-- Included for jquery datepicker -->
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
     <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+
+    <link rel="stylesheet" href="index.css" />
+    
 
     <title>Trail Buddies Template</title>
 
@@ -30,7 +31,7 @@
                 <ul class="nav navbar-nav">
                     <li><a class="navbar-brand" href="#"><img alt="Trail Buddies" src="mtn.png"></a></li>
                     <li><a class="navbar-brand" href="#">Trail Buddies</a></li>
-                    <li><a id="addhikelink" data-toggle="popover" data-placement="bottom" data-content="Right click on the map to add a hike." href="#">Add a Hike</a></li>
+                    <li><a id="addhikelink" data-toggle="popover" data-placement="bottom" data-content="Double click on the map to add a hike." href="#">Add a Hike</a></li>
                     <li><a data-toggle="collapse" data-target="#demo" aria-expanded="false" aria-controls="demo" href="#">Filter</a></li>
                 </ul>
             </div>
@@ -39,9 +40,26 @@
 
 
     <div id="demo" class="collapse">
-        <h5>Hike Length</h5>
-        <p>Min: <input type="text" class="filterlength" id="filterminlength" class="form-control">
-        Max: <input type="text" class="filterlength" id="filtermaxlength" class="form-control"></p>
+        <!-- <div class="filterfield">
+            <h4>Hike Length (miles)</h4>
+            <p>Min: <input type="text" class="filterlength form-control" id="filterminlength" class="form-control">
+            Max: <input type="text" class="filterlength form-control" id="filtermaxlength" class="form-control"></p>
+        </div> -->
+
+        <form class="filterfield form-inline" role="form" id="filterdateform">
+            <h4>Date</h4>
+            <p>From 
+            <label class='control-label' id="datelabel" for='datepickerfiltermin'>Red alert: Empty fields!</label>
+            <input type="text" name="mindate" class="filterdate form-control" id="datepickerfiltermin"> 
+            to <input type="text" name="maxdate" class="filterdate form-control" id="datepickerfiltermax" class="form-control"></p>
+            <button type="button" id="filterdatebutton" class="btn btn-default">
+                Filter
+            </button>
+
+            <script type="text/javascript">
+                
+            </script>
+        </form>
     </div>
 
 
@@ -146,5 +164,6 @@
 
 <div id="map_canvas"></div>
 
+<script type="text/javascript" src="index.js"></script>
 </body>
 </html>
