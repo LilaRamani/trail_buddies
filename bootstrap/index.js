@@ -58,7 +58,7 @@ function renderMap()
 {
         me = new google.maps.LatLng(myLat, myLng);
         map.panTo(me);
-        map.setZoom(8);
+        map.setZoom(6);
 
         var image = 'small_blue_ball.png';
         var marker = new google.maps.Marker({
@@ -176,6 +176,14 @@ function addInfoWindow(marker) {
 
 $(function () {
         $('[data-toggle="popover"]').popover()
+});
+
+
+
+$(document).ready( function() {
+        if (screen.width < 960) {
+                $('[data-toggle="popover"]').attr("data-content", "Double click on the map to add a hike.");
+        }
 });
 
 
