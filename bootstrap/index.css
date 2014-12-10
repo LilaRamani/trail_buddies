@@ -46,6 +46,10 @@ body {
         float: left;
 }
 
-#datelabel {
+#datelabel, #datelabel2 {
         display: none;
+}
+
+.filterfield {
+        margin: 5px;
 }

@@ -7,13 +7,13 @@
  *                                                              *
  ****************************************************************/
 
-var map;
-var myLat = 0;
-var myLng = -100;
-var me = new google.maps.LatLng(myLat, myLng);
-var GLOBALmarker;
-var GLOBALinfowindow;
-var mapOptions = {
+ var map;
+ var myLat = 0;
+ var myLng = -100;
+ var me = new google.maps.LatLng(myLat, myLng);
+ var GLOBALmarker;
+ var GLOBALinfowindow;
+ var mapOptions = {
         center: me,
         zoom: 2
 };
@@ -36,7 +36,7 @@ function initialize() {
                     map.set("disableDoubleClickZoom", true);
                     placeMarker(e.latLng, map);
             });
-        }
+    }
 }
 
 function MyLocation()
@@ -62,10 +62,10 @@ function renderMap()
 
         var image = 'small_blue_ball.png';
         var marker = new google.maps.Marker({
-              position: me,
-              map: map,
-              icon: image
-        });
+          position: me,
+          map: map,
+          icon: image
+  });
 
 }
 
@@ -115,10 +115,10 @@ function createHikeMark(hike)
             participants += hike.participants[i] + ", ";
         }
 
-        var content = marker.title + "</br>" + "With: " + participants + "</br>" +
-                              hike.descript;
+    var content = marker.title + "</br>" + "With: " + participants + "</br>" +
+    hike.descript;
 
-        var infowindow = new google.maps.InfoWindow();
+    var infowindow = new google.maps.InfoWindow();
         google.maps.event.addListener(marker, 'click', function() {
                 infowindow.close();
                 infowindow.setContent(content);
@@ -213,56 +213,25 @@ $("#filterdatebutton").click( function() {
         var minDate = new Date($("#datepickerfiltermin").val());
         var maxDate = new Date($("#datepickerfiltermax").val());
 
-        if ((maxDate == "Invalid Date") && (minDate == "Invalid Date")) {
+        if ((maxDate == "Invalid Date") || (minDate == "Invalid Date")) {
 
-                        $("#datelabel").css("display", "block");
-                        $("#filterdateform").addClass("has-error");
-                        return; 
+                $("#datelabel").css("display", "block");
+                $("#filterdateform").addClass("has-error");
+                return; 
         } 
 
         if (maxDate < minDate) {
-                var temp = maxDate;
-                maxDate = minDate;
-                minDate = temp;
-                
-        }
+                $("#datelabel2").css("display", "block");
+                $("#filterdateform").addClass("has-error");
+                return;   
+        } 
 
-                console.log("max:" + maxDate + " min: " + minDate)
-
-                //console.log("Date: " + Date.parse(minDate.getMonth() + "/" + minDate.getDate() + "/" + minDate.getYear())); 
-                //< Date.parse(maxDate.getMonth() + "/" + maxDate.getDate() + "/" + maxDate.getYear())
-                 
-
-                var filterdatedata = $('#filterdateform').serialize();
-                console.log(filterdatedata);
-                // $.post( "http://ancient-lake-4187.herokuapp.com/FILTERDATE", filterdatedata, function( data ) {
-                //         console.log( "data is back!");
-                //         console.log( data );
-                // }, "json");                               
+        var filterdatedata = $('#filterdateform').serialize();
+        $.get("http://ancient-lake-4187.herokuapp.com/filterDate?" + filterdatedata, function(data) {
+                for(var j = 0; j < data.length; j++) {
+                        //createHikeMark(data[j]);
+                        console.log(data[j]);
+                }
+        }, "json");                              
 });
-
-// app.get('/filterDate', function(request, response) {
-//         response.set('Content-Type', 'text/html');
-
-//         var minDate = request.query.minDate;
-//         var maxDate = request.query.maxDate;
-           // if (minDate > maxDate) {
-           //      response.send();
-           // }
-
-//         db.collection('fooditems', function(er, collection) {
-//                 collection.find().toArray(function(err, cursor) {
-//                         if (!err) {
-//                                 indexPage += "<!DOCTYPE HTML><html><head><title>What Did You Feed Me?</title></head><body><h1>What Did You Feed Me?</h1>";
-//                                 for (var count = 0; count < cursor.length; count++) {
-//                                         indexPage += "<p>You fed me " + cursor[count].fooditem + "!</p>";
-//                                 }
-//                                 indexPage += "</body></html>"
-//                                 response.send(indexPage);
-//                         } else {
-//                                 response.send('<!DOCTYPE HTML><html><head><title>What Did You Feed Me?</title></head><body><h1>Whoops, something went terribly wrong!</h1></body></html>');
-//                         }
-//                 });
-//         });
-// });
 

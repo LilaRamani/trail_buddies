@@ -40,16 +40,12 @@
 
 
     <div id="demo" class="collapse">
-        <!-- <div class="filterfield">
-            <h4>Hike Length (miles)</h4>
-            <p>Min: <input type="text" class="filterlength form-control" id="filterminlength" class="form-control">
-            Max: <input type="text" class="filterlength form-control" id="filtermaxlength" class="form-control"></p>
-        </div> -->
+
 
         <form class="filterfield form-inline" role="form" id="filterdateform">
             <h4>Date</h4>
-            <p>From 
-            <label class='control-label' id="datelabel" for='datepickerfiltermin'>Red alert: Empty fields!</label>
+            <p>From <label class='control-label' id="datelabel" for='datepickerfiltermin'>Red alert: Empty fields!</label>
+            <label class='control-label' id="datelabel2" for='datepickerfiltermin'>Date range must be in order</label>
             <input type="text" name="mindate" class="filterdate form-control" id="datepickerfiltermin"> 
             to <input type="text" name="maxdate" class="filterdate form-control" id="datepickerfiltermax" class="form-control"></p>
             <button type="button" id="filterdatebutton" class="btn btn-default">
