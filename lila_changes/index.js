@@ -203,8 +203,8 @@ function submit_addhike() {
                     }
                 }, "json");
         }, "json");
-        clearUserMarker();
     }
+    clearUserMarker();
 }
 
 
@@ -222,6 +222,6 @@ function submit_joinhike() {
                         }
                     }, "json");
         }, "json");
-        clearUserMarker();
     }
+    clearUserMarker();
 }
