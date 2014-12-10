@@ -31,7 +31,7 @@
                 <ul class="nav navbar-nav">
                     <li><a class="navbar-brand" href="#"><img alt="Trail Buddies" src="mtn.png"></a></li>
                     <li><a class="navbar-brand" href="#">Trail Buddies</a></li>
-                    <li><a id="addhikelink" data-toggle="popover" data-placement="bottom" data-content="Right click on the map to add a hike." href="#">Add a Hike</a></li>
+                    <li><a id="addhikelink" data-toggle="popover" data-placement="bottom" data-content="Double click on the map to add a hike." href="#">Add a Hike</a></li>
                     <li><a data-toggle="collapse" data-target="#demo" aria-expanded="false" aria-controls="demo" href="#">Filter</a></li>
                 </ul>
             </div>
@@ -40,15 +40,13 @@
 
 
     <div id="demo" class="collapse">
-        <!-- <div class="filterfield">
-            <h4>Hike Length (miles)</h4>
-            <p>Min: <input type="text" class="filterlength form-control" id="filterminlength" class="form-control">
-            Max: <input type="text" class="filterlength form-control" id="filtermaxlength" class="form-control"></p>
-        </div> -->
+
 
         <form class="filterfield form-inline" role="form" id="filterdateform">
             <h4>Date</h4>
-            <p>From <input type="text" name="mindate" class="filterdate form-control" id="datepickerfiltermin"> 
+            <p>From <label class='control-label' id="datelabel" for='datepickerfiltermin'>Red alert: Empty fields!</label>
+            <label class='control-label' id="datelabel2" for='datepickerfiltermin'>Date range must be in order</label>
+            <input type="text" name="mindate" class="filterdate form-control" id="datepickerfiltermin"> 
             to <input type="text" name="maxdate" class="filterdate form-control" id="datepickerfiltermax" class="form-control"></p>
             <button type="button" id="filterdatebutton" class="btn btn-default">
                 Filter

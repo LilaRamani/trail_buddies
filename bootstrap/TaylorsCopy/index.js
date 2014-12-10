@@ -22,36 +22,54 @@ function initialize() {
                 placeMarker(e.latLng, map);
         });
 }
+/*
+function createHikeMark(hike)
+{
+        var loc = new google.maps.LatLng(hike.lat, hike.lng);
+        var marker = new google.maps.Marker({
+                map: map,
+                position: loc,
+                title: hike.hike_name
+        });
+        var participants = "";
 
+        for (var i = 0; i < hike.participants.length; i++) {
+            participants += hike.participants[i] + ", ";
+        }
+
+        var content = marker.title + "</br>" + "With: " + participants + "</br>" +   hike.descript;
+
+        var infowindow = new google.maps.InfoWindow(); 
+
+
+        google.maps.event.addListener(marker, 'click', function() {
+                infowindow.close();
+                infowindow.setContent(content);
+                infowindow.open(map, this);
+        });
+}
+*/
 
 //This is the new version of this function, which now it includes the button:
 function createHikeMark(hike)
 {
     var loc = new google.maps.LatLng(hike.lat, hike.lng);
-    /*
     var marker = new google.maps.Marker({
 	    map: map,
 	    position: loc,
 	    title: hike.hike_name
         });
-    */
     var participants = "";
 
     for (var i = 0; i < hike.participants.length; i++) {
 	participants += hike.participants[i] + ", ";
     }
 
+    //Includes the new button now:
+    var theContent = marker.title + "</br>" + "With: " + participants + "</br>" +
+	hike.descript + "</br>"+
+	"<button data-toggle=\"modal\" data-target=\"#myModal2\">Join hike</button>";
 
-    var theContent = "<html><head><style>h2{text-align:center; color:green;}#invisible{display:none;}</style></head><body>" +"<p id='invisible'>" + hike._id +"ENDOFID" +  "</p>" + "<h2>"  + hike.hike_name+" </h2>" + "<p><b>" + "Participants:</b> " + 
-    participants + "<p><b>Date of Hike: </b>" + hike.start_date + "<p><b>Time: </b>" + /*hike.hour + ":" hike.minute + " " + hike.am_pm +*/ "</p><p><b>Description: </b>" 
-    + hike.descript + "</p></body></html>" + "<button data-toggle=\"modal\" data-target=\"#myModal2\">Join hike</button>";
-
-     var marker = new google.maps.Marker({
-	   map: map,
-	   position: loc,
-	   title: hike.hike_name,
-	   holdThis: theContent
-      });
 
     //Set initial content to include button 
     JOINinfowindow = new google.maps.InfoWindow({
@@ -61,43 +79,12 @@ function createHikeMark(hike)
 
     google.maps.event.addListener(marker, 'click', function(){
 	    JOINinfowindow.close();
-	    var theID = findSubstring(118, "ENDOFID", marker.holdThis);
-
-	    $('#IdofHike').val(theID);
-	    console.log("The id is: " + theID);
-		    
-	    console.log($('#IdofHike'));
-	   
       	    JOINinfowindow.setContent(theContent);//Set content with button each time
 	    JOINinfowindow.open(map,this);
 	});
-}
-
-
-
-
-//Takes in: startIndex: the index position of the string that is the first character of the desired substring,
-//          firstUnwantedChar: the string value that includes the first unwanted character after the end of
-//                             the DESIRED substring.
-//e.g.: fullString = "Hello World", start index = 0, firstUnwantedSubstring = "orld", 
-//  then the return value will be: "Hello W".
-function findSubstring(startIndex, firstUnwantedSubstring, fullString) {
-    var StartingIndexOfUnwantedString = fullString.indexOf(firstUnwantedSubstring);
-    var desiredString = fullString.substring(startIndex, StartingIndexOfUnwantedString);
-    return desiredString;
-}
-
-//Helper function for the 'click' event in createHikeMark function. 
-//(For when someone clicks the "Join hike" button)
-//Will set the values of the fields that appear on the form that pops up on the screen
-//so that they are already populated with the information. 
-function setJoinHikeFormData(hike) {
-    console.log("Hike lat getting: " + hike.lat);
-    $('#latOfHike').val(hike.lat);  
-    $('#lngOfHike').val(hike.lng);
+   
   
 }
-
 
 
 function placeMarker(position, map) {
@@ -133,7 +120,8 @@ function addInfoWindow(marker) {
 
         GLOBALinfowindow = new google.maps.InfoWindow({
 		//                content: "<button data-toggle=\"modal\" data-target=\"#myModal\">Add hike</button>",
-                content: "<button data-toggle=\"modal\" data-target=\"#myModal\">Add hike</button>",
+                content: "<button data-toggle=\"modal\" data-target=\"#myModal\">Add hike</button>",          
+
         });
 
         GLOBALinfowindow.open(map,marker);
@@ -217,11 +205,8 @@ function submit_addhike() {
 function submit_joinhike() {
     //need to change some of the variable names so that the post request will work                                                                                           
     var formData = $('#joinhikeform').serialize();
-
-
-    console.log("Form data is: " + formData);
-    $.post( "http://ancient-lake-4187.herokuapp.com/joinHikeTaylor", formData, function( data ) {
-
+    console.log(formData);
+    $.post( "http://ancient-lake-4187.herokuapp.com/joinHike", formData, function( data ) {
 	    console.log( "data is back here now");
 	    console.log( data );
         }, "json");
