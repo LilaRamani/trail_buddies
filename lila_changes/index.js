@@ -39,7 +39,7 @@ function createHikeMark(hike)
     }
     /* get weather forecast for this location */
     $.get("http://ancient-lake-4187.herokuapp.com/weather.json?lat=" + hike.lat + "&lng=" + hike.lng, function(weather_data) {
-        console.log(weather_data);
+        /* console.log(weather_data); */
     }, "json");
 
     /* create and format info window content */
