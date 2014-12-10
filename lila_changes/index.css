@@ -45,3 +45,11 @@ body {
 .datetimeselect {
         float: left;
 }
+
+#datelabel, #datelabel2 {
+        display: none;
+}
+
+.filterfield {
+        margin: 5px;
+}

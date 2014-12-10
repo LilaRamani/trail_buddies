@@ -20,6 +20,12 @@ function initialize() {
         google.maps.event.addListener(map, 'rightclick', function(e) {
                 placeMarker(e.latLng, map);
         });
+        if (screen.width < 960) {
+            google.maps.event.addListener(map, 'dblclick', function(e) {
+                    map.set("disableDoubleClickZoom", true);
+                    placeMarker(e.latLng, map);
+            });
+        }
 }
 
 
@@ -196,18 +202,27 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 $(function () {
         $('[data-toggle="popover"]').popover();
-})
+});
 
 // add open datepicker in add hike modal
 $(function() {
         $( "#datepicker" ).datepicker({ minDate: 0});
 });
 
+$(function() {
+        $("#datepickerfiltermin").datepicker({ minDate: 0});
+});
+
+$(function() {
+        $("#datepickerfiltermax").datepicker({ minDate: 0});
+});
+
+
 // called when add hike "save changes" button is clicked
 function submit_addhike() {
-//    if ($("input[name='name']").val() == '' || $("input[name='email']").val() == '' || $("input[name='start_date']").val() == '') {
-//        alert("ALL FIELDS ARE REQUIRED");
-//    } else {
+    if ($("input[name='name']").val() == '' || $("input[name='email']").val() == '' || $("input[name='start_date']").val() == '') {
+        alert("ALL FIELDS ARE REQUIRED");
+    } else {
         //need to change some of the variable names so that the post request will work
         var formData = $('#addhikeform').serialize();
         $.post( "http://ancient-lake-4187.herokuapp.com/sendLocation", formData, function( data ) {
@@ -218,16 +233,16 @@ function submit_addhike() {
                     }
                 }, "json");
         }, "json");
-//    }
+    }
     clearUserMarker();
 }
 
 
 //called when "add hike" button is clicked from Join Hike
 function submit_joinhike() {
-//    if ($("input[name='name']").val() == '' || $("input[name='email']").val() == '') {
-//        alert("ALL FIELDS ARE REQUIRED");
-//    } else {
+    if ($("input[name='name']").val() == '' || $("input[name='email']").val() == '') {
+        alert("ALL FIELDS ARE REQUIRED");
+    } else {
         var formData = $('#joinhikeform').serialize();
         $.post( "http://ancient-lake-4187.herokuapp.com/joinHikeTaylor", formData, function( data ) {
                     /* immediatedly get all the data after the hike is added so marker appears */
@@ -237,6 +252,33 @@ function submit_joinhike() {
                         }
                     }, "json");
         }, "json");
-//    }
+    }
     clearUserMarker();
 }
+
+$("#filterdatebutton").click( function() {
+
+        var minDate = new Date($("#datepickerfiltermin").val());
+        var maxDate = new Date($("#datepickerfiltermax").val());
+
+        if ((maxDate == "Invalid Date") || (minDate == "Invalid Date")) {
+
+                $("#datelabel").css("display", "block");
+                $("#filterdateform").addClass("has-error");
+                return; 
+        } 
+
+        if (maxDate < minDate) {
+                $("#datelabel2").css("display", "block");
+                $("#filterdateform").addClass("has-error");
+                return;   
+        } 
+
+        var filterdatedata = $('#filterdateform').serialize();
+        $.get("http://ancient-lake-4187.herokuapp.com/filterDate?" + filterdatedata, function(data) {
+                for(var j = 0; j < data.length; j++) {
+                        //createHikeMark(data[j]);
+                        console.log(data[j]);
+                }
+        }, "json");                              
+});
