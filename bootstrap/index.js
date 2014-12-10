@@ -58,7 +58,7 @@ function renderMap()
 {
         me = new google.maps.LatLng(myLat, myLng);
         map.panTo(me);
-        map.setZoom(6);
+        map.setZoom(4);
 
         var image = 'small_blue_ball.png';
         var marker = new google.maps.Marker({
