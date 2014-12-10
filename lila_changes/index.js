@@ -83,7 +83,6 @@ function format_weather(weatherData, hike)
             weather_content += "<p>Temperature High: " + weatherData.daily.data[offset].apparentTemperatureMax + " F</p><p>Temperature Low: " + weatherData.daily.data[offset].apparentTemperatureMin + " F</p><p>Description: " + weatherData.daily.data[offset].summary + "</p>";
             return weather_content;
         } else {
-            console.log(weatherData);
             weather_content = "<h5>Weather Right Now: </h5>";
             weather_content += "<p>Temperature: " + weatherData.currently.apparentTemperature + " F</p><p>Description: " + weatherData.currently.summary + "</p>";
             return weather_content;
