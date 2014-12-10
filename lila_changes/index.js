@@ -8,6 +8,7 @@ var mapOptions = {
         center: me,
         zoom: 2
 };
+var marker_array = [];
 
 function initialize() {
         map = map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
@@ -76,6 +77,7 @@ function createHikeMark(hike)
             JOINinfowindow.setContent(theContent);//Set content with button each time
             JOINinfowindow.open(map,this);
         });
+        marker_array.push(marker);
     }, "json");
 }
 /* formats weather for the infowindow */
@@ -220,11 +222,10 @@ $(function() {
 
 // called when add hike "save changes" button is clicked
 function submit_addhike() {
-    if ($("input[name='name']").val() == '' || $("input[name='email']").val() == '' || $("input[name='start_date']").val() == '') {
+    var formData = $('#addhikeform').serialize();
+    if ($("#add_hike_name").val() == '' || $("#add_hike_email").val() == '') {
         alert("ALL FIELDS ARE REQUIRED");
     } else {
-        //need to change some of the variable names so that the post request will work
-        var formData = $('#addhikeform').serialize();
         $.post( "http://ancient-lake-4187.herokuapp.com/sendLocation", formData, function( data ) {
                 /* immediatedly get all the data after the hike is added so marker appears */
                 $.get("http://ancient-lake-4187.herokuapp.com/", function(returned) {
@@ -240,7 +241,7 @@ function submit_addhike() {
 
 //called when "add hike" button is clicked from Join Hike
 function submit_joinhike() {
-    if ($("input[name='name']").val() == '' || $("input[name='email']").val() == '') {
+    if ($("join_hike_name").val() == '' || $("join_hike_email").val() == '') {
         alert("ALL FIELDS ARE REQUIRED");
     } else {
         var formData = $('#joinhikeform').serialize();
@@ -257,7 +258,6 @@ function submit_joinhike() {
 }
 
 $("#filterdatebutton").click( function() {
-
         var minDate = new Date($("#datepickerfiltermin").val());
         var maxDate = new Date($("#datepickerfiltermax").val());
 

@@ -36,7 +36,7 @@ function initialize() {
                     map.set("disableDoubleClickZoom", true);
                     placeMarker(e.latLng, map);
             });
-    }
+        }
 }
 
 function MyLocation()
