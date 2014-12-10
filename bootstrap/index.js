@@ -18,6 +18,17 @@ var mapOptions = {
         zoom: 2
 };
 
+
+$(document).ready( function() {
+        alert(is_touch_device());
+}); 
+
+function is_touch_device() {
+  return 'ontouchstart' in window // works on most browsers 
+      || 'onmsgesturechange' in window; // works on ie10
+};
+
+
 function initialize() {
         map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
 
@@ -161,7 +172,7 @@ function addInfoWindow(marker) {
 
 $(function () {
         $('[data-toggle="popover"]').popover()
-})
+});
 
 
 // called when add hike "save changes" button is clicked
@@ -176,19 +187,82 @@ function submit_addhike() {
         clearUserMarker();
 }
 
+
+
 // add open datepicker in add hike modal
 $(function() {
-        $( "#datepicker" ).datepicker({ minDate: 0});
+        $("#datepicker").datepicker({ minDate: 0});
 });
 
 $(function() {
-        $( "#datepicker1" ).datepicker({ minDate: 0});
+        $("#datepickerfiltermin").datepicker({ minDate: 0});
 });
 
-/*
- *  filter results get requests
- */
-
-$(".filterlength").change( function() {
-        console.log("field changed");                            
+$(function() {
+        $("#datepickerfiltermax").datepicker({ minDate: 0});
 });
+
+
+
+$("#filterdatebutton").click( function() {
+
+        var minDate = new Date($("#datepickerfiltermin").val());
+        var maxDate = new Date($("#datepickerfiltermax").val());
+
+
+        
+      
+        
+        if ((maxDate == "Invalid Date") && (minDate == "Invalid Date")) {
+
+                        $("#filterdateform").prepend( " <label class='control-label' for='datepickerfiltermin'>Red alert: Empty fields!</label>" );
+                        $("#filterdateform").addClass("has-error");
+                        return; 
+        } 
+
+        if (maxDate < minDate) {
+                var temp = maxDate;
+                maxDate = minDate;
+                minDate = temp;
+                
+        }
+
+                //console.log("max:" + maxDate + " min: " + minDate)
+
+                //console.log("Date: " + Date.parse(minDate.getMonth() + "/" + minDate.getDate() + "/" + minDate.getYear())); 
+                //< Date.parse(maxDate.getMonth() + "/" + maxDate.getDate() + "/" + maxDate.getYear())
+                 
+
+                var filterdatedata = $('#filterdateform').serialize();
+                console.log(filterdatedata);
+                // $.post( "http://ancient-lake-4187.herokuapp.com/FILTERDATE", filterdatedata, function( data ) {
+                //         console.log( "data is back!");
+                //         console.log( data );
+                // }, "json");                               
+});
+
+// app.get('/filterDate', function(request, response) {
+//         response.set('Content-Type', 'text/html');
+
+//         var minDate = request.query.minDate;
+//         var maxDate = request.query.maxDate;
+           // if (minDate > maxDate) {
+           //      response.send();
+           // }
+
+//         db.collection('fooditems', function(er, collection) {
+//                 collection.find().toArray(function(err, cursor) {
+//                         if (!err) {
+//                                 indexPage += "<!DOCTYPE HTML><html><head><title>What Did You Feed Me?</title></head><body><h1>What Did You Feed Me?</h1>";
+//                                 for (var count = 0; count < cursor.length; count++) {
+//                                         indexPage += "<p>You fed me " + cursor[count].fooditem + "!</p>";
+//                                 }
+//                                 indexPage += "</body></html>"
+//                                 response.send(indexPage);
+//                         } else {
+//                                 response.send('<!DOCTYPE HTML><html><head><title>What Did You Feed Me?</title></head><body><h1>Whoops, something went terribly wrong!</h1></body></html>');
+//                         }
+//                 });
+//         });
+// });
+

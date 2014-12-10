@@ -45,3 +45,17 @@ body {
 .datetimeselect {
         float: left;
 }
+
+.collapse {
+        background-color: #F8F8F8;
+        border-color: #E7E7E7;
+
+        border: 1px solid #e3e3e3;
+        border-top-style: solid;
+        border-top-width: 1px;
+}
+
+.filterfield {
+        float: left;
+        margin: 10px;
+}
