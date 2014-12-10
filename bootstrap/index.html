@@ -48,7 +48,9 @@
 
         <form class="filterfield form-inline" role="form" id="filterdateform">
             <h4>Date</h4>
-            <p>From <input type="text" name="mindate" class="filterdate form-control" id="datepickerfiltermin"> 
+            <p>From 
+            <label class='control-label' id="datelabel" for='datepickerfiltermin'>Red alert: Empty fields!</label>
+            <input type="text" name="mindate" class="filterdate form-control" id="datepickerfiltermin"> 
             to <input type="text" name="maxdate" class="filterdate form-control" id="datepickerfiltermax" class="form-control"></p>
             <button type="button" id="filterdatebutton" class="btn btn-default">
                 Filter

@@ -30,10 +30,13 @@ function initialize() {
                 placeMarker(e.latLng, map);
         });
 
-        google.maps.event.addListener(map, 'dblclick', function(e) {
-                map.set("disableDoubleClickZoom", true);
-                placeMarker(e.latLng, map);
-        });
+
+        if (screen.width < 960) {
+            google.maps.event.addListener(map, 'dblclick', function(e) {
+                    map.set("disableDoubleClickZoom", true);
+                    placeMarker(e.latLng, map);
+            });
+        }
 }
 
 function MyLocation()
@@ -210,13 +213,9 @@ $("#filterdatebutton").click( function() {
         var minDate = new Date($("#datepickerfiltermin").val());
         var maxDate = new Date($("#datepickerfiltermax").val());
 
-
-        
-      
-        
         if ((maxDate == "Invalid Date") && (minDate == "Invalid Date")) {
 
-                        $("#filterdateform").prepend( " <label class='control-label' for='datepickerfiltermin'>Red alert: Empty fields!</label>" );
+                        $("#datelabel").css("display", "block");
                         $("#filterdateform").addClass("has-error");
                         return; 
         } 
@@ -228,7 +227,7 @@ $("#filterdatebutton").click( function() {
                 
         }
 
-                //console.log("max:" + maxDate + " min: " + minDate)
+                console.log("max:" + maxDate + " min: " + minDate)
 
                 //console.log("Date: " + Date.parse(minDate.getMonth() + "/" + minDate.getDate() + "/" + minDate.getYear())); 
                 //< Date.parse(maxDate.getMonth() + "/" + maxDate.getDate() + "/" + maxDate.getYear())

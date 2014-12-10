@@ -45,3 +45,7 @@ body {
 .datetimeselect {
         float: left;
 }
+
+#datelabel {
+        display: none;
+}
