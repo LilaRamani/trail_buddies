@@ -19,16 +19,6 @@ var mapOptions = {
 };
 
 
-$(document).ready( function() {
-        alert(is_touch_device());
-}); 
-
-function is_touch_device() {
-  return 'ontouchstart' in window // works on most browsers 
-      || 'onmsgesturechange' in window; // works on ie10
-};
-
-
 function initialize() {
         map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
 
@@ -37,6 +27,11 @@ function initialize() {
         getHikes();
 
         google.maps.event.addListener(map, 'rightclick', function(e) {
+                placeMarker(e.latLng, map);
+        });
+
+        google.maps.event.addListener(map, 'dblclick', function(e) {
+                map.set("disableDoubleClickZoom", true);
                 placeMarker(e.latLng, map);
         });
 }
@@ -86,6 +81,12 @@ google.maps.event.addDomListener(window, 'load', initialize);
  ****************************************************************/
 
 
+// returns false if device has no touch screen capabilities, true if it does
+// some IE bugs
+function is_touch_device() {
+  return 'ontouchstart' in window // works on most browsers 
+      || 'onmsgesturechange' in window; // works on ie10
+};
 
 
 function getHikes() {
