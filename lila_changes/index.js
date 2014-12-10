@@ -37,48 +37,64 @@ function createHikeMark(hike)
             participants += hike.participants[i] + ", ";
         }
     }
-    /* get weather forecast for this location */
+    /* get weather forecast for this location and also format info windows while you're at it */
     $.get("http://ancient-lake-4187.herokuapp.com/weather.json?lat=" + hike.lat + "&lng=" + hike.lng, function(weather_data) {
-        /* console.log(weather_data); */
+        var weatherData = weather_data; 
+
+        /* parse the weather content */
+        var weather_content = format_weather(weatherData, hike);
+
+        /* create and format info window content */
+        var theContent = "<html><head><style>h2{text-align:center; color:green;}#invisible{display:none;}</style></head><body>" +"<p id='invisible'>" + hike._id +"ENDOFID" +  "</p>" + "<h2>"  + hike.hike_name+" </h2>" + "<p><b>" + "Participants:</b> " + 
+        participants + "<p><b>Date of Hike: </b>" + hike.start_date + "</p><p><b>Time: </b>" + hike.hour + ":" + hike.minute + " " + hike.am_pm + "</p><p><b>Description: </b>" 
+        + hike.descript + weather_content + "</p></body></html>" + "<button data-toggle=\"modal\" data-target=\"#myModal2\">Join hike</button>";
+    
+         var marker = new google.maps.Marker({
+           map: map,
+           position: loc,
+           title: hike.hike_name,
+           holdThis: theContent
+          });
+    
+        /* Set initial content to include button */
+        JOINinfowindow = new google.maps.InfoWindow({
+            content: theContent,
+        });
+    
+        google.maps.event.addListener(marker, 'click', function(){
+            JOINinfowindow.close();
+            var theID = findSubstring(118, "ENDOFID", marker.holdThis);
+    
+            $('#IdofHike').val(theID);
+                   
+            JOINinfowindow.setContent(theContent);//Set content with button each time
+            JOINinfowindow.open(map,this);
+        });
     }, "json");
-
-    /* create and format info window content */
-    var theContent = "<html><head><style>h2{text-align:center; color:green;}#invisible{display:none;}</style></head><body>" +"<p id='invisible'>" + hike._id +"ENDOFID" +  "</p>" + "<h2>"  + hike.hike_name+" </h2>" + "<p><b>" + "Participants:</b> " + 
-    participants + "<p><b>Date of Hike: </b>" + hike.start_date + "</p><p><b>Time: </b>" + hike.hour + ":" + hike.minute + " " + hike.am_pm + "</p><p><b>Description: </b>" 
-    + hike.descript + "</p></body></html>" + "<button data-toggle=\"modal\" data-target=\"#myModal2\">Join hike</button>";
-
-     var marker = new google.maps.Marker({
-       map: map,
-       position: loc,
-       title: hike.hike_name,
-       holdThis: theContent
-      });
-
-    /* Set initial content to include button */
-    JOINinfowindow = new google.maps.InfoWindow({
-        content: theContent,
-    });
-
-
-    google.maps.event.addListener(marker, 'click', function(){
-        JOINinfowindow.close();
-        var theID = findSubstring(118, "ENDOFID", marker.holdThis);
-
-        $('#IdofHike').val(theID);
-               
-        JOINinfowindow.setContent(theContent);//Set content with button each time
-        JOINinfowindow.open(map,this);
-    });
+}
+/* formats weather for the infowindow */
+function format_weather(weatherData, hike)
+{
+    var currentdate = new Date();
+        var hike_date = new Date(hike.start_date);
+        if (hike_date <= (currentdate.setDate(currentdate.getDate() + 10))) {
+            var offset = currentdate.getDay() - hike_date.getDay();
+            weather_content = "<h5>The Weather Forcast for " + (hike_date.getMonth() + 1) + "/" + hike_date.getDate() + "/" +  hike_date.getFullYear() + ": </h5>";
+            weather_content += "<p>Temperature High: " + weatherData.daily.data[offset].apparentTemperatureMax + " F</p><p>Temperature Low: " + weatherData.daily.data[offset].apparentTemperatureMin + " F</p><p>Description: " + weatherData.daily.data[offset].summary + "</p>";
+            return weather_content;
+        } else {
+            console.log(weatherData);
+            weather_content = "<h5>Weather Right Now: </h5>";
+            weather_content += "<p>Temperature: " + weatherData.currently.apparentTemperature + " F</p><p>Description: " + weatherData.currently.summary + "</p>";
+            return weather_content;
+        }
 }
 
-
-
-
-//Takes in: startIndex: the index position of the string that is the first character of the desired substring,
-//          firstUnwantedChar: the string value that includes the first unwanted character after the end of
-//                             the DESIRED substring.
-//e.g.: fullString = "Hello World", start index = 0, firstUnwantedSubstring = "orld", 
-//  then the return value will be: "Hello W".
+/* Takes in: startIndex: the index position of the string that is the first character of the desired substring,
+          firstUnwantedChar: the string value that includes the first unwanted character after the end of
+                             the DESIRED substring.
+e.g.: fullString = "Hello World", start index = 0, firstUnwantedSubstring = "orld", 
+  then the return value will be: "Hello W". */
 function findSubstring(startIndex, firstUnwantedSubstring, fullString) {
     var StartingIndexOfUnwantedString = fullString.indexOf(firstUnwantedSubstring);
     var desiredString = fullString.substring(startIndex, StartingIndexOfUnwantedString);
@@ -190,9 +206,9 @@ $(function() {
 
 // called when add hike "save changes" button is clicked
 function submit_addhike() {
-    if ($("input[name='name']").val() == '' || $("input[name='email']").val() == '' || $("input[name='start_date']").val() == '') {
-        alert("ALL FIELDS ARE REQUIRED");
-    } else {
+//    if ($("input[name='name']").val() == '' || $("input[name='email']").val() == '' || $("input[name='start_date']").val() == '') {
+//        alert("ALL FIELDS ARE REQUIRED");
+//    } else {
         //need to change some of the variable names so that the post request will work
         var formData = $('#addhikeform').serialize();
         $.post( "http://ancient-lake-4187.herokuapp.com/sendLocation", formData, function( data ) {
@@ -203,16 +219,16 @@ function submit_addhike() {
                     }
                 }, "json");
         }, "json");
-    }
+//    }
     clearUserMarker();
 }
 
 
 //called when "add hike" button is clicked from Join Hike
 function submit_joinhike() {
-    if ($("input[name='name']").val() == '' || $("input[name='email']").val() == '') {
-        alert("ALL FIELDS ARE REQUIRED");
-    } else {
+//    if ($("input[name='name']").val() == '' || $("input[name='email']").val() == '') {
+//        alert("ALL FIELDS ARE REQUIRED");
+//    } else {
         var formData = $('#joinhikeform').serialize();
         $.post( "http://ancient-lake-4187.herokuapp.com/joinHikeTaylor", formData, function( data ) {
                     /* immediatedly get all the data after the hike is added so marker appears */
@@ -222,6 +238,6 @@ function submit_joinhike() {
                         }
                     }, "json");
         }, "json");
-    }
+//    }
     clearUserMarker();
 }
