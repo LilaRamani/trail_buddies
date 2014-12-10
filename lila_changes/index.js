@@ -113,10 +113,8 @@ function findSubstring(startIndex, firstUnwantedSubstring, fullString) {
 //Will set the values of the fields that appear on the form that pops up on the screen
 //so that they are already populated with the information. 
 function setJoinHikeFormData(hike) {
-    console.log("Hike lat getting: " + hike.lat);
     $('#latOfHike').val(hike.lat);  
     $('#lngOfHike').val(hike.lng);
-  
 }
 
 
@@ -189,7 +187,7 @@ function renderMap()
         me = new google.maps.LatLng(myLat, myLng);
         
         map.panTo(me);
-        map.setZoom(8);
+        map.setZoom(6);
 
         var image = 'small_blue_ball.png';
         var marker = new google.maps.Marker({
@@ -241,7 +239,7 @@ function submit_addhike() {
 
 //called when "add hike" button is clicked from Join Hike
 function submit_joinhike() {
-    if ($("join_hike_name").val() == '' || $("join_hike_email").val() == '') {
+    if ($("#join_hike_name").val() == '' || $("#join_hike_email").val() == '') {
         alert("ALL FIELDS ARE REQUIRED");
     } else {
         var formData = $('#joinhikeform').serialize();
@@ -256,6 +254,15 @@ function submit_joinhike() {
     }
     clearUserMarker();
 }
+$("#clearfilterdatebutton").click( function() {
+    for (var i = 0; i < marker_array.length; i++) {
+        if (marker_array[i].getMap() == null) {
+            marker_array[i].setMap(map);
+        } else {
+            marker_array.splice(i, 1);
+        }
+    }   
+});
 
 $("#filterdatebutton").click( function() {
         var minDate = new Date($("#datepickerfiltermin").val());
@@ -273,12 +280,23 @@ $("#filterdatebutton").click( function() {
                 $("#filterdateform").addClass("has-error");
                 return;   
         } 
-
         var filterdatedata = $('#filterdateform').serialize();
         $.get("http://ancient-lake-4187.herokuapp.com/filterDate?" + filterdatedata, function(data) {
+                setAllMap(null);
                 for(var j = 0; j < data.length; j++) {
-                        //createHikeMark(data[j]);
-                        console.log(data[j]);
+                        createHikeMark(data[j]);
                 }
         }, "json");                              
+});
+
+function setAllMap(map) {
+  for (var i = 0; i < marker_array.length; i++) {
+    marker_array[i].setMap(map);
+  }
+}
+
+$(document).ready( function() {
+        if (screen.width < 960) {
+                $('[data-toggle="popover"]').attr("data-content", "Double click on the map to add a hike.");
+        }
 });
